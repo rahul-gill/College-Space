@@ -2,24 +2,31 @@ package com.artisticent.collegespace.di
 
 import com.artisticent.collegespace.remote.apis.CodeforcesApi
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(SingletonComponent::class)
 object AppModule{
 
     @Singleton
     @Provides
-    fun getCodeforcesApiInstance(): CodeforcesApi = Retrofit.Builder()
-        .baseUrl("https://codeforces.com/api")
-        .addConverterFactory(GsonConverterFactory.create())
+    fun getMoshiInstance(): Moshi = Moshi.Builder()
+        .build()
+
+
+    @Singleton
+    @Provides
+    fun getCodeforcesApiInstance(moshi: Moshi): CodeforcesApi = Retrofit.Builder()
+        .baseUrl("https://codeforces.com/api/")
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .build().
-        create(CodeforcesApi::class.java)
+        .build()
+        .create(CodeforcesApi::class.java)
 }
