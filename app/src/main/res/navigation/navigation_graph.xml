@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/contestsFragment">
+
+    <fragment
+        android:id="@+id/contestsFragment"
+        android:name="com.artisticent.collegespace.ui.contests.ContestsFragment"
+        android:label="ContestsFragment" />
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="com.artisticent.collegespace.ui.events.EventFragment"
+        android:label="EventFragment" >
+        <action
+            android:id="@+id/action_eventFragment_to_newEventFragment"
+            app:destination="@id/newEventFragment" />
+        <argument
+            android:name="arg_bundle"
+            app:argType="com.artisticent.collegespace.ui.events.EventArg"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/newEventFragment"
+        android:name="com.artisticent.collegespace.ui.events.NewEventFragment"
+        android:label="NewEventFragment" >
+        <action
+            android:id="@+id/action_newEventFragment_to_eventFragment"
+            app:destination="@id/eventFragment" />
+    </fragment>
+</navigation>

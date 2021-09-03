@@ -1,4 +1,4 @@
-package com.artisticent.collegespace.ui
+package com.artisticent.collegespace.ui.contests
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.artisticent.collegespace.databinding.ContestItemBinding
-import com.artisticent.collegespace.remote.apis.Contest
+import com.artisticent.collegespace.repository.models.ContestModel
 
 class ContestListAdapter :
-    ListAdapter<Contest, ContestListAdapter.ViewHolder>(ContestDiffCallback()) {
+    ListAdapter<ContestModel, ContestListAdapter.ViewHolder>(ContestDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -24,7 +24,7 @@ class ContestListAdapter :
 
 
     class ViewHolder(private var binding: ContestItemBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(item: Contest) {
+        fun bind(item: ContestModel) {
             binding.contest = item
             binding.executePendingBindings()
         }
@@ -39,12 +39,12 @@ class ContestListAdapter :
     }
 
 
-    class ContestDiffCallback : DiffUtil.ItemCallback<Contest>(){
-        override fun areItemsTheSame(oldItem: Contest, newItem: Contest): Boolean {
-            return oldItem.id == newItem.id
+    class ContestDiffCallback : DiffUtil.ItemCallback<ContestModel>(){
+        override fun areItemsTheSame(oldItem: ContestModel, newItem: ContestModel): Boolean {
+            return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: Contest, newItem: Contest): Boolean {
+        override fun areContentsTheSame(oldItem: ContestModel, newItem: ContestModel): Boolean {
             return oldItem == newItem
         }
 

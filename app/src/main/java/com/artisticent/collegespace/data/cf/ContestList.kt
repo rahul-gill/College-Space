@@ -1,4 +1,4 @@
-package com.artisticent.collegespace.remote.apis
+package com.artisticent.collegespace.data.cf
 
 import com.squareup.moshi.JsonClass
 
