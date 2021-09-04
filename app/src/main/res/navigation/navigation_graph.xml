@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/navigation_graph"
-    app:startDestination="@id/contestsFragment">
+    app:startDestination="@id/eventFragment">
 
     <fragment
         android:id="@+id/contestsFragment"
@@ -29,4 +28,8 @@
             android:id="@+id/action_newEventFragment_to_eventFragment"
             app:destination="@id/eventFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.artisticent.collegespace.ui.UserFragment"
+        android:label="UserFragment" />
 </navigation>

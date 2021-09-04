@@ -32,6 +32,7 @@ class NewEventFragment : Fragment() {
 
 
         binding.addEventButton.setOnClickListener {
+
             val argsBundle = EventArg(
                 name = binding.eventName.text.toString(),
                 startDate = startDate,
@@ -49,14 +50,14 @@ class NewEventFragment : Fragment() {
 
     private fun chooseEventDate(start:Boolean){
         val date = if(start){startDate} else {endDate}
-        val datePicker = DatePickerDialog(requireContext(),DatePickerDialog.OnDateSetListener{  _,year,month,dayofMonth ->
+        val datePicker = DatePickerDialog(requireContext(), { _, year, month, dayofMonth ->
                 date.set(year,month, dayofMonth)
         },date.get(Calendar.YEAR),date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH))
         datePicker.show()
     }
     private  fun chooseEventTime(start:Boolean){
         val date = if(start){startDate} else {endDate}
-        val timePicker = TimePickerDialog(requireContext(), TimePickerDialog.OnTimeSetListener{ _,hour,minute ->
+        val timePicker = TimePickerDialog(requireContext(), { _, hour, minute ->
             date.set(Calendar.HOUR,hour)
             date.set(Calendar.MINUTE,minute)
         },date.get(Calendar.HOUR),date.get(Calendar.MINUTE),false)

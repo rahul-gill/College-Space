@@ -2,10 +2,9 @@ package com.artisticent.collegespace.di
 
 import android.content.Context
 import androidx.room.Room
-import com.artisticent.collegespace.data.cf.CodeforcesApi
+import com.artisticent.collegespace.data.contestsApi.ContestApi
 import com.artisticent.collegespace.data.room.EventDatabase
 import com.artisticent.collegespace.data.room.EventDatabaseDao
-import com.artisticent.collegespace.data.room.WeekViewEventConverter
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import dagger.Module
@@ -15,7 +14,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.nio.file.WatchEvent
 import javax.inject.Singleton
 
 @Module
@@ -27,15 +25,14 @@ object AppModule{
     fun getMoshiInstance(): Moshi = Moshi.Builder()
         .build()
 
-
     @Singleton
     @Provides
-    fun getCodeforcesApiInstance(moshi: Moshi): CodeforcesApi = Retrofit.Builder()
-        .baseUrl("https://codeforces.com/api/")
+    fun getContestApi(moshi: Moshi) : ContestApi = Retrofit.Builder()
+        .baseUrl("https://www.kontests.net/api/v1/")
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
-        .create(CodeforcesApi::class.java)
+        .create(ContestApi::class.java)
 
     @Singleton
     @Provides

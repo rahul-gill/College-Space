@@ -1,5 +1,6 @@
 package com.artisticent.collegespace.ui.events
 
+import android.app.AlertDialog
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,18 +10,15 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.alamkanak.weekview.DateTimeInterpreter
 import com.alamkanak.weekview.MonthLoader.MonthChangeListener
 import com.alamkanak.weekview.WeekView
-import com.alamkanak.weekview.WeekViewEvent
 import com.artisticent.collegespace.R
 import com.artisticent.collegespace.databinding.FragmentEventBinding
-import dagger.hilt.EntryPoint
+import com.artisticent.collegespace.repository.models.EventModel
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -30,6 +28,7 @@ class EventFragment @Inject constructor(): Fragment(){
     private lateinit var binding: FragmentEventBinding
     private val args : EventFragmentArgs by navArgs()
     private val viewModel: EventViewModel by viewModels()
+    private var dialog : AlertDialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,18 +37,35 @@ class EventFragment @Inject constructor(): Fragment(){
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_event, container, false)
 
         //things for WeekView
-        viewModel.loadEvents()
         val mMonthChangeListener = MonthChangeListener{ _, month ->
             return@MonthChangeListener viewModel.eventList.value?.filter {
                 it.startTime.get(Calendar.MONTH) == month
             }
         }
+
         val mEventClickListener = WeekView.EventClickListener { event, _ ->
             Toast.makeText(this.activity, "Clicked  ${event.name} ${viewModel.eventList.value!!.size}" , Toast.LENGTH_SHORT).show()
         }
-        val mEventLongPressListener = WeekView.EventLongPressListener{ event, _ ->
-            Toast.makeText(this.activity, "${event.name} deleted", Toast.LENGTH_SHORT).show()
+
+        val mEventLongPressListener = WeekView.EventLongPressListener { event, _ ->
+            if (dialog == null) {
+                dialog = AlertDialog.Builder(this.activity)
+                    .setTitle("Delete this event?")
+                    .setMessage("Do you want to delete the event ${event.name}")
+                    .setPositiveButton("Yes") { _, _ ->
+                        viewModel.deleteEvent(event as EventModel)
+                        Toast.makeText(this.activity, "${event.name} deleted", Toast.LENGTH_SHORT)
+                            .show()
+                    }.setNegativeButton("No") { _, _ ->
+                        Toast.makeText(this.activity, "Deletion cancelled", Toast.LENGTH_SHORT)
+                            .show()
+                    }.create()
+            }
+            dialog!!.show()
         }
+
+
+
 
         //assigning weekView things
         val mWeekView = binding.weekView
@@ -92,7 +108,7 @@ class EventFragment @Inject constructor(): Fragment(){
             navigate(EventFragmentDirections.actionEventFragmentToNewEventFragment())
         }
         //get args from New Event Fragment
-        val event = WeekViewEvent()
+        val event = EventModel()
         val bundle = args.argBundle
         if(bundle != null) {
             event.name = bundle.name
@@ -106,6 +122,12 @@ class EventFragment @Inject constructor(): Fragment(){
 
         viewModel.eventList.observe(viewLifecycleOwner,{
             mWeekView.notifyDatasetChanged()
+        })
+        viewModel.eventListUpdate.observe(viewLifecycleOwner,{
+            if(it == true){
+                mWeekView.notifyDatasetChanged()
+                viewModel.doneUpdating()
+            }
         })
 
         return binding.root

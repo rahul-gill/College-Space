@@ -4,13 +4,10 @@ import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.artisticent.collegespace.R
 import com.artisticent.collegespace.databinding.FragmentContestsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class ContestsFragment : Fragment() {
@@ -22,14 +19,11 @@ class ContestsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_contests,container,false)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        viewModel.loadContestCached()
-
-
-
-
         val adapter = ContestListAdapter()
         binding.contestList.adapter = adapter
 
@@ -37,11 +31,14 @@ class ContestsFragment : Fragment() {
 
 
         viewModel.contestList.observe(viewLifecycleOwner, {
-            Timber.i("my list read")
             adapter.submitList(it)
         })
         viewModel.doneLoading.observe(viewLifecycleOwner,{
-            adapter.submitList(viewModel.contestList.value)
+            if(it == true) {
+                adapter.submitList(viewModel.contestList.value)
+                binding.contestList.smoothScrollToPosition(0)
+                viewModel.doneLoadingEventFinish()
+            }
         })
 
 
@@ -54,7 +51,11 @@ class ContestsFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        viewModel. loadContestDataNew()
+        when(item.itemId){
+            R.id.refresh_menu_item -> viewModel. loadContestDataNew()
+            R.id.sort_menu_item -> viewModel.sortContestData()
+        }
+
         return super.onOptionsItemSelected(item)
     }
 }

@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/contestsFragment"
-        android:enabled="true"
-        android:icon="@drawable/ic_contest"
-        android:title="Contests"/>
-    <item
         android:id="@+id/eventFragment"
         android:enabled="true"
         android:icon="@drawable/ic_calendar"
         android:title="Event Calendar"/>
+
+    <item
+        android:id="@+id/contestsFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_contest"
+        android:title="Contests"/>
+
+    <item
+        android:id="@+id/userFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_user"
+        android:title="User"
+        />
 </menu>

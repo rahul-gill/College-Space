@@ -14,8 +14,7 @@ data class EventArg(
         parcel.readString()!!,
         parcel.readSerializable() as Calendar,
         parcel.readSerializable() as Calendar
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)

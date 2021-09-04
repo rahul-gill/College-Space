@@ -7,6 +7,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.artisticent.collegespace.R
 import com.artisticent.collegespace.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -24,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             NavigationUI.onNavDestinationSelected(item,navController)
         }
+        binding.bottomNavigationView.labelVisibilityMode = BottomNavigationView.LABEL_VISIBILITY_UNLABELED
     }
 
     override fun onNavigateUp(): Boolean {

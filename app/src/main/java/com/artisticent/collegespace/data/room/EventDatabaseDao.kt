@@ -1,6 +1,5 @@
 package com.artisticent.collegespace.data.room
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao

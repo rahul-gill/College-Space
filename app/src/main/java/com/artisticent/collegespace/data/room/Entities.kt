@@ -1,17 +1,17 @@
 package com.artisticent.collegespace.data.room
 
 import androidx.room.*
-import com.alamkanak.weekview.WeekViewEvent
 import com.artisticent.collegespace.repository.models.ContestModel
+import com.artisticent.collegespace.repository.models.EventModel
 import com.google.gson.Gson
 
 
 @Entity
 data class EventEntity(
-    @PrimaryKey(autoGenerate = true)
-    val eventId: Long = 0L,
+    @PrimaryKey(autoGenerate = false)
+    val eventId: Int = 0,
     @ColumnInfo(name = "event")
-    val weekViewEvent: WeekViewEvent
+    val event: EventModel
 )
 
 @Entity
@@ -26,12 +26,12 @@ class WeekViewEventConverter{
     private val gson = Gson()
 
     @TypeConverter
-    fun fromWeekViewEventToJson(value : WeekViewEvent): String {
+    fun fromEventModelToJson(value : EventModel): String {
         return gson.toJson(value)
     }
     @TypeConverter
-    fun fromJsonToWeekViewEvent(value: String): WeekViewEvent {
-        return gson.fromJson(value, WeekViewEvent::class.java)
+    fun fromJsonToEventModel(value: String): EventModel {
+        return gson.fromJson(value, EventModel::class.java)
     }
 
     @TypeConverter
