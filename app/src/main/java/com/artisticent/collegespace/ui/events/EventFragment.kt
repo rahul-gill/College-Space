@@ -19,9 +19,14 @@ import com.artisticent.collegespace.R
 import com.artisticent.collegespace.databinding.FragmentEventBinding
 import com.artisticent.collegespace.repository.models.EventModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
+
+
+
+
 
 @AndroidEntryPoint
 class EventFragment @Inject constructor(): Fragment(){
@@ -37,10 +42,15 @@ class EventFragment @Inject constructor(): Fragment(){
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_event, container, false)
 
         //things for WeekView
-        val mMonthChangeListener = MonthChangeListener{ _, month ->
-            return@MonthChangeListener viewModel.eventList.value?.filter {
-                it.startTime.get(Calendar.MONTH) == month
+        val mMonthChangeListener = MonthChangeListener{ _, newMonth ->
+            val events =  viewModel.eventList.value?.filter {
+                it.startTime.get(Calendar.MONTH) == newMonth
+            }.also{
+                for(i in it!!){
+                    Timber.i("event $i")
+                }
             }
+            return@MonthChangeListener events
         }
 
         val mEventClickListener = WeekView.EventClickListener { event, _ ->

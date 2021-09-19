@@ -6,7 +6,6 @@ import com.artisticent.collegespace.data.room.EventEntity
 class EventModel : WeekViewEvent(){
     fun eventModelToEventEntity(): EventEntity {
         return EventEntity(
-            eventId = this.hashCode(),
             event = this
         )
     }

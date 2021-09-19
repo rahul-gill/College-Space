@@ -36,8 +36,8 @@ class EventViewModel @Inject constructor(var repository: Repository) : ViewModel
 
     }
     fun insertEvent(event : EventModel){
+        this@EventViewModel._eventList.value?.add(event)
         viewModelScope.launch(Dispatchers.IO) {
-            this@EventViewModel._eventList.value?.add(event)
             repository.insertEvent(event)
         }
     }

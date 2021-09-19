@@ -14,4 +14,10 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/bright_black</item>
     </style>
+    <style name="InputTextStyle">
+        <item name="android:layout_height">50dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:titleMarginBottom">10dp</item>
+    </style>
 </resources>

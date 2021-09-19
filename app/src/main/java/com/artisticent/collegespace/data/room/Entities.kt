@@ -8,7 +8,7 @@ import com.google.gson.Gson
 
 @Entity
 data class EventEntity(
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     val eventId: Int = 0,
     @ColumnInfo(name = "event")
     val event: EventModel

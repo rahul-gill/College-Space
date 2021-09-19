@@ -8,4 +8,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background_gray">#55555555</color>
     <color name="bright_black">#212121</color>
+    <color name="input_text_background">#22440000</color>
 </resources>
