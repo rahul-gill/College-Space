@@ -2,26 +2,24 @@ package com.artisticent.collegespace.ui.users
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.artisticent.collegespace.R
 import com.artisticent.collegespace.databinding.FragmentLoginBinding
-import com.artisticent.collegespace.ui.LoginSignupActivity
 import com.artisticent.collegespace.ui.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import timber.log.Timber
 
 
 class LoginFragment : Fragment() {
 
-    lateinit var auth : FirebaseAuth
+    private lateinit var auth : FirebaseAuth
 
 
     override fun onCreateView(
@@ -44,9 +42,11 @@ class LoginFragment : Fragment() {
 
 
         binding.loginButton.setOnClickListener {
+            it.isClickable = false
             val email = binding.emailInput.text.toString()
             val password = binding.passwordInput.text.toString()
             login(email,password)
+            it.isClickable = true
         }
 
 

@@ -13,7 +13,7 @@
         <entry key="app/src/main/res/layout/activity_login_signup.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/contest_item.xml" value="0.18958333333333333" />
-        <entry key="app/src/main/res/layout/fragment_contests.xml" value="0.10778985507246377" />
+        <entry key="app/src/main/res/layout/fragment_contests.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_event.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1671875" />
         <entry key="app/src/main/res/layout/fragment_new_event.xml" value="0.18958333333333333" />

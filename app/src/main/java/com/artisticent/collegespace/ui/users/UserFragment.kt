@@ -10,13 +10,11 @@ import androidx.fragment.app.Fragment
 import com.artisticent.collegespace.R
 import com.artisticent.collegespace.databinding.FragmentUserBinding
 import com.artisticent.collegespace.ui.LoginSignupActivity
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class UserFragment : Fragment() {
     lateinit var binding : FragmentUserBinding
-    private lateinit var auth : FirebaseAuth
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

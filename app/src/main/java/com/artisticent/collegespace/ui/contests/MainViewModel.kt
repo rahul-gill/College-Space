@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,9 +28,10 @@ class MainViewModel @Inject constructor(var repository: Repository): ViewModel()
 
     init{
         loadContestCached()
+        Timber.i("Contest ViewModel created.")
     }
 
-    fun loadContestCached(){
+    private fun loadContestCached(){
         viewModelScope.launch(Dispatchers.IO) {
             _contestList = repository.loadContestDataFromCache()
             withContext(Dispatchers.Main) {
@@ -38,17 +40,18 @@ class MainViewModel @Inject constructor(var repository: Repository): ViewModel()
         }
     }
 
-    fun loadContestDataNew(){
+    private fun loadContestDataNew(){
         viewModelScope.launch(Dispatchers.IO) {
             _contestList = repository.loadContestDataFromNetwork()
             withContext(Dispatchers.Main) {
+                sortContestData()
                 _doneLoading.value = true
             }
         }
 
     }
 
-    fun sortContestData(){
+    private fun sortContestData(){
         _contestList.value =  _contestList.value?.sortedWith { o1, o2 ->
             val res = o1!!.start_time.compareTo(o2!!.start_time)
             when {

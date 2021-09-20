@@ -30,6 +30,7 @@ class SignupFragment : Fragment() {
 
         auth = Firebase.auth
         binding.signupButton.setOnClickListener {
+            it.isClickable = false
             val email = binding.signupEmail.text
             val password = binding.signupPass.text
             val confirmPass = binding.signupConfirmPass.text
@@ -38,6 +39,7 @@ class SignupFragment : Fragment() {
             }else{
                 signup(email.toString(), password.toString())
             }
+            it.isClickable = true
         }
 
         binding.goToLogin.setOnClickListener {
@@ -50,7 +52,7 @@ class SignupFragment : Fragment() {
 
     private fun signup(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener() { task ->
+            .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(requireContext(), "Signup Successful.", Toast.LENGTH_SHORT)
                         .show()
