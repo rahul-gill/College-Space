@@ -9,6 +9,7 @@ import com.artisticent.collegespace.repository.models.EventModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -43,9 +44,11 @@ class EventViewModel @Inject constructor(var repository: Repository) : ViewModel
     }
     fun deleteEvent(event: EventModel){
         viewModelScope.launch(Dispatchers.IO) {
-            _eventList.value?.remove(event)
             repository.deleteEvent(event)
-            _eventListUpdate.value = false
+            withContext(Dispatchers.Main){
+                _eventList.value?.remove(event)
+                _eventListUpdate.value = true
+            }
         }
     }
 

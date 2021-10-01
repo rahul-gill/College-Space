@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/userFragment">
 
     <fragment
@@ -31,5 +32,30 @@
     <fragment
         android:id="@+id/userFragment"
         android:name="com.artisticent.collegespace.ui.users.UserFragment"
-        android:label="UserFragment" />
+        android:label="UserFragment" >
+        <action
+            android:id="@+id/action_userFragment_to_feedFragment"
+            app:destination="@id/feedFragment" />
+        <action
+            android:id="@+id/action_userFragment_to_userEditFragment"
+            app:destination="@id/userEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/feedFragment"
+        android:name="com.artisticent.collegespace.ui.user_groups.FeedFragment"
+        android:label="FeedFragment" >
+        <argument
+            android:name="user_group"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+    <fragment
+        android:id="@+id/userEditFragment"
+        android:name="com.artisticent.collegespace.ui.users.UserEditFragment"
+        android:label="fragment_user_edit"
+        tools:layout="@layout/fragment_user_edit" >
+        <action
+            android:id="@+id/action_userEditFragment_to_userFragment"
+            app:destination="@id/userFragment" />
+    </fragment>
 </navigation>

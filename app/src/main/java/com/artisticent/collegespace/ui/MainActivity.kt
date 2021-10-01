@@ -10,10 +10,10 @@ import com.artisticent.collegespace.R
 import com.artisticent.collegespace.databinding.ActivityMainBinding
 import com.artisticent.collegespace.repository.Repository
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -29,15 +29,23 @@ class MainActivity : AppCompatActivity() {
 
 
         val navController = this.findNavController(R.id.navHostFragment)
+
+
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             NavigationUI.onNavDestinationSelected(item,navController)
         }
         binding.bottomNavigationView.labelVisibilityMode = BottomNavigationView.LABEL_VISIBILITY_UNLABELED
         binding.bottomNavigationView.selectedItemId = R.id.userFragment
+        val dest = intent.getStringExtra("navigation-dest")
+        if(dest != null && dest == "edit-fragment") {
+            navController.navigate(R.id.userEditFragment)
+            Timber.i("navigate to user edit")
+        }
 
         lifecycleScope.launch(Dispatchers.IO) {
             repository.loadContestDataFromNetwork()
         }
+
     }
 
     override fun onNavigateUp(): Boolean {

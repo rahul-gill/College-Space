@@ -47,7 +47,6 @@ class EventFragment @Inject constructor(): Fragment(){
                 it.startTime.get(Calendar.MONTH) == newMonth
             }.also{
                 for(i in it!!){
-                    Timber.i("event $i")
                 }
             }
             return@MonthChangeListener events
@@ -124,6 +123,12 @@ class EventFragment @Inject constructor(): Fragment(){
             event.name = bundle.name
             event.startTime = bundle.startDate
             event.endTime = bundle.endDate
+            event.color = when(bundle.type){
+                "Personal Event" ->  resources.getColor(R.color.colorPrimary,null)
+                "Group Event" ->  resources.getColor(R.color.colorSecondary,null)
+                else -> resources.getColor(R.color.background_gray,null)
+            }
+
             viewModel.insertEvent(event).also {
                 mWeekView.notifyDatasetChanged()
             }

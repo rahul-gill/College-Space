@@ -51,7 +51,6 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:23.0.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation fileTree(dir: '/home/ashen-one/Desktop/HDD/Documents/Android/CollegeSpace/library/Android-Week-View-2.3.0.1', include: ['*.aar', '*.jar'], exclude: [])
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
@@ -91,8 +90,14 @@ dependencies {
     implementation 'com.squareup.moshi:moshi:1.12.0'
     kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.12.0'
 
-    //week view
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+
+    // week view
     implementation 'com.github.alamkanak:android-week-view:1.2.6'
+    // circle image view
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     //room
     implementation "androidx.room:room-runtime:2.3.0"
@@ -102,6 +107,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:28.4.1')
     implementation 'com.google.firebase:firebase-database-ktx'
     implementation 'com.google.android.gms:play-services-auth:19.2.0'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.2.1"
     implementation 'com.google.firebase:firebase-auth-ktx'
 
 

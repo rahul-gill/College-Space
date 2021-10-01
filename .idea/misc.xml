@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../../../layout/custom_preview.xml" value="0.18229166666666666" />
         <entry key="app/src/main/res/drawable-anydpi/ic_link.xml" value="0.20572916666666666" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.20572916666666666" />
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.20572916666666666" />
@@ -15,12 +16,19 @@
         <entry key="app/src/main/res/layout/contest_item.xml" value="0.18958333333333333" />
         <entry key="app/src/main/res/layout/fragment_contests.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_event.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_feed.xml" value="0.10552536231884058" />
+        <entry key="app/src/main/res/layout/fragment_group_list.xml" value="0.12092391304347826" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1671875" />
         <entry key="app/src/main/res/layout/fragment_new_event.xml" value="0.18958333333333333" />
         <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/fragment_user.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_user.xml" value="0.334375" />
+        <entry key="app/src/main/res/layout/fragment_user_edit.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/post.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/post_item.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/user_group_item.xml" value="0.22" />
         <entry key="app/src/main/res/menu/botton_navigation_menu.xml" value="0.15092592592592594" />
         <entry key="app/src/main/res/menu/top_app_bar.xml" value="0.18958333333333333" />
+        <entry key="app/src/main/res/menu/user_options_menu.xml" value="0.1638888888888889" />
       </map>
     </option>
   </component>

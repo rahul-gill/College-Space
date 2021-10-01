@@ -54,7 +54,6 @@ class ContestsFragment : Fragment() {
     }
 
     private fun registerFilterChange() {
-        Timber.i("Contest Filter Clicked")
         val checkedItemIds = binding.contestPlatformFilter.checkedChipIds
         if(checkedItemIds.size == 0){
             adapter.submitList(viewModel.contestList.value)

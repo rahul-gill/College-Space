@@ -14,7 +14,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(var repository: Repository): ViewModel() {
+class MainViewModel @Inject constructor(val repository: Repository): ViewModel() {
     private var _contestList = MutableLiveData<List<ContestModel>>()
     val contestList : LiveData<List<ContestModel>>
         get() = _contestList
@@ -28,7 +28,6 @@ class MainViewModel @Inject constructor(var repository: Repository): ViewModel()
 
     init{
         loadContestCached()
-        Timber.i("Contest ViewModel created.")
     }
 
     private fun loadContestCached(){

@@ -60,9 +60,9 @@
             android:text="Add Event"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/event_type_spinner"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/end_time" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/start_time"
@@ -84,11 +84,19 @@
             android:text="EndTime"
             android:textColor="@color/bright_black"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/add_event_button"
+            app:layout_constraintBottom_toTopOf="@+id/event_type_spinner"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/end_date" />
+
+        <Spinner
+            android:id="@+id/event_type_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/add_event_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/end_time" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

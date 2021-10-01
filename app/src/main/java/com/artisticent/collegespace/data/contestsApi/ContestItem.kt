@@ -26,7 +26,7 @@ data class ContestItem(
         val sdf = SimpleDateFormat("yyyy-MM-dd'T'kk:mm:ss", Locale.getDefault())
         startTime.time = sdf.parse(startTimeModified)!!
         return ContestModel(
-            name.hashCode().also{ Timber.i("my log generated int $it")},
+            name.hashCode(),
             name,
             when(site){
                 "CodeForces"      -> ContestModel.Platform.CODEFORCES

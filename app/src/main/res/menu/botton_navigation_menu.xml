@@ -13,6 +13,12 @@
         android:title="Contests"/>
 
     <item
+        android:id="@+id/feedFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_groups"
+        android:title="Groups"/>
+
+    <item
         android:id="@+id/userFragment"
         android:enabled="true"
         android:icon="@drawable/ic_user"

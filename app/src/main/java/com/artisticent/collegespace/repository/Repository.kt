@@ -53,6 +53,7 @@ class Repository @Inject constructor() {
 
     suspend fun loadAllEvents(): List<EventModel> {
         return databaseDao.getAllEvents().map {
+            it.event.id = it.eventId
             it.event
         }
     }
