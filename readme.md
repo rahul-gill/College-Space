@@ -8,6 +8,6 @@ Features will be
 - etc.etc.etc.
 
 # Screenshots
-1 | 2 | 3
-- | - | -
+| 1 | 2 | 3 |
+|---|---|---|
 ![alt](./screenshots/1.jpg) | ![alt](screenshots/2.jpg) | ![alt](screenshots/3.jpg)
