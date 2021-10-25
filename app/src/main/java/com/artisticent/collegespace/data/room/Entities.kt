@@ -1,8 +1,10 @@
 package com.artisticent.collegespace.data.room
 
 import androidx.room.*
-import com.artisticent.collegespace.repository.models.ContestModel
-import com.artisticent.collegespace.repository.models.EventModel
+import com.artisticent.collegespace.domain.models.ContestModel
+import com.artisticent.collegespace.domain.models.EventModel
+import com.artisticent.collegespace.domain.models.PostModel
+import com.artisticent.collegespace.domain.models.UserModel
 import com.google.gson.Gson
 
 
@@ -22,7 +24,7 @@ data class ContestEntity(
     val contest: ContestModel
 )
 
-class WeekViewEventConverter{
+class ModelJsonConvertor{
     private val gson = Gson()
 
     @TypeConverter
@@ -42,4 +44,39 @@ class WeekViewEventConverter{
     fun fromJsonToContestModel(value: String): ContestModel {
         return gson.fromJson(value, ContestModel::class.java)
     }
+
+    @TypeConverter
+    fun fromUserModelToJson(value: UserModel): String{
+        return gson.toJson(value, UserModel::class.java)
+    }
+    @TypeConverter
+    fun fromJsonToUserModel(value: String): UserModel{
+        return gson.fromJson(value, UserModel::class.java)
+    }
+
+    @TypeConverter
+    fun fromPostModelToJson(value: PostModel): String{
+        return gson.toJson(value, PostModel::class.java)
+    }
+    @TypeConverter
+    fun fromJsonToPostModel(value: String): PostModel{
+        return gson.fromJson(value, PostModel::class.java)
+    }
 }
+
+
+@Entity
+data class UserEntity(
+    @PrimaryKey(autoGenerate = false)
+    val userNo: Int = 0,
+    @ColumnInfo(name = "contest")
+    val user: UserModel
+)
+
+@Entity
+data class PostEntity(
+    @PrimaryKey(autoGenerate = false)
+    val postTimeId: Long,
+    @ColumnInfo(name = "post")
+    val post: PostModel
+)

@@ -3,7 +3,7 @@
     package="com.artisticent.collegespace">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <application
         android:name=".ThisApplication"
         android:allowBackup="true"
@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CollegeSpace">
         <activity
-            android:name=".ui.LoginSignupActivity"
+            android:name="com.artisticent.collegespace.presentation.ui.LoginSignupActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.artisticent.collegespace.presentation.ui.MainActivity"
             android:exported="true">
         </activity>
     </application>

@@ -10,4 +10,18 @@
     <color name="background_gray_second">#EEEEEE</color>
     <color name="bright_black">#212121</color>
     <color name="input_text_background">#22440000</color>
+
+    <color name="holo_blue_dark">#0099cc</color>
+    <color name="holo_yellow_dark">#ff8800</color>
+    <color name="holo_green_dark">#669900</color>
+    <color name="holo_purple_dark">#9933cc</color>
+    <color name="holo_red_dark">#cc0000</color>
+    <color name="transparent_grey">#44AAAAAA</color>
+    <integer-array name="load_bar_colors">
+        <item>@color/holo_blue_dark</item>
+        <item>@color/holo_yellow_dark</item>
+        <item>@color/holo_green_dark</item>
+        <item>@color/holo_purple_dark</item>
+        <item>@color/holo_red_dark</item>
+    </integer-array>
 </resources>

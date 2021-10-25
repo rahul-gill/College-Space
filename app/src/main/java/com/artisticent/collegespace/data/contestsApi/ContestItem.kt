@@ -1,8 +1,7 @@
 package com.artisticent.collegespace.data.contestsApi
 
-import com.artisticent.collegespace.repository.models.ContestModel
+import com.artisticent.collegespace.domain.models.ContestModel
 import com.squareup.moshi.JsonClass
-import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 

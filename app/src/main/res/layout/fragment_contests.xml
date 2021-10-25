@@ -6,19 +6,19 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.artisticent.collegespace.ui.contests.MainViewModel" />
+            type="com.artisticent.collegespace.presentation.viewmodels.ContestViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.contests.ContestsFragment">
+        tools:context=".presentation.ui.contests.ContestsFragment">
 
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/horizontal_scroll_view_filters"
-            app:layout_constraintBottom_toTopOf="@+id/contest_list"
+            app:layout_constraintBottom_toTopOf="@+id/contest_refresh_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -104,15 +104,19 @@
             </com.google.android.material.chip.ChipGroup>
 
         </HorizontalScrollView>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/contest_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal_scroll_view_filters" >
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/contest_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/horizontal_scroll_view_filters" />
-
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -7,13 +7,16 @@
     <data>
         <variable
             name="contest"
-            type="com.artisticent.collegespace.repository.models.ContestModel" />
+            type="com.artisticent.collegespace.domain.models.ContestModel" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         style="@style/ListViewCardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:strokeColor="@color/design_default_color_primary"
+        app:strokeWidth="2dp"
+        app:cardCornerRadius="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout"
@@ -66,5 +69,5 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

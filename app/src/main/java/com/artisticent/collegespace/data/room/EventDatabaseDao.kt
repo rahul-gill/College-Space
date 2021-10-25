@@ -13,12 +13,12 @@ interface EventDatabaseDao {
     @Delete
     fun deleteEvent(event: EventEntity)
 
-    @Query("SELECT * FROM evententity")
+    @Query("SELECT * FROM EventEntity")
     fun getAllEvents() : List<EventEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertContest(contest: ContestEntity)
 
-    @Query("SELECT * FROM contestentity")
+    @Query("SELECT * FROM ContestEntity")
     fun getAllContests() : List<ContestEntity>
 }
