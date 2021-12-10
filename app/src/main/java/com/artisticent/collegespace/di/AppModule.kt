@@ -2,11 +2,14 @@ package com.artisticent.collegespace.di
 
 import android.content.Context
 import androidx.room.Room
+import com.artisticent.collegespace.data.EventRepositoryImpl
+import com.artisticent.collegespace.data.FirebaseRepositoryImpl
 import com.artisticent.collegespace.data.contestsApi.ContestApi
 import com.artisticent.collegespace.data.contestsApi.NetworkInterceptor
 import com.artisticent.collegespace.data.room.AppDatabase
 import com.artisticent.collegespace.data.room.EventDatabaseDao
-import com.artisticent.collegespace.data.room.FirebaseDao
+import com.artisticent.collegespace.domain.EventRepository
+import com.artisticent.collegespace.domain.FirebaseRepository
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import dagger.Module
@@ -61,8 +64,16 @@ object AppModule{
         return database.eventDatabaseDao
     }
 
+
+    @Singleton
     @Provides
-    fun getFirebaseDao(database: AppDatabase) : FirebaseDao{
-        return database.firebaseDao
+    fun getFirebaseRepository(): FirebaseRepository{
+        return FirebaseRepositoryImpl()
+    }
+
+    @Singleton
+    @Provides
+    fun getEventRepository(): EventRepository{
+        return EventRepositoryImpl()
     }
 }

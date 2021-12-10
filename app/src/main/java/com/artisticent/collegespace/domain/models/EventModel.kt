@@ -1,12 +1,12 @@
 package com.artisticent.collegespace.domain.models
 
 import com.alamkanak.weekview.WeekViewEvent
-import com.artisticent.collegespace.data.room.EventEntity
+import com.artisticent.collegespace.data.room.entities.EventEntity
 import java.util.*
 
 
 class EventModel(var id: Int = Int.MIN_VALUE) : WeekViewEvent(){
-    var overdue = false
+    private var overdue = false
     fun eventModelToEventEntity(): EventEntity {
         return EventEntity(
             eventId = this.id,

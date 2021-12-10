@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.artisticent.collegespace.domain.models.ContestModel
-import com.artisticent.collegespace.domain.Repository
+import com.artisticent.collegespace.domain.EventRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,7 +13,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class ContestViewModel @Inject constructor(val repository: Repository): ViewModel() {
+class ContestViewModel @Inject constructor(private val eventRepository: EventRepository): ViewModel() {
     private var _contestList = MutableLiveData<List<ContestModel>>()
     val contestList : LiveData<List<ContestModel>>
         get() = _contestList
@@ -29,7 +29,7 @@ class ContestViewModel @Inject constructor(val repository: Repository): ViewMode
     private fun loadContestCached(){
         viewModelScope.launch(Dispatchers.Main) {
             _isLoadingEvents.value = true
-            _contestList.value = repository.loadContestDataFromCache()
+            _contestList.value = eventRepository.loadContestDataFromCache()
             sortContestData()
             _isLoadingEvents.value = false
         }
@@ -42,7 +42,7 @@ class ContestViewModel @Inject constructor(val repository: Repository): ViewMode
 
         viewModelScope.launch(Dispatchers.Main) {
             _isLoadingEvents.value = true
-            _contestList.value = repository.loadContestDataFromNetwork()
+            _contestList.value = eventRepository.loadContestDataFromNetwork()
             sortContestData()
             _isLoadingEvents.value = false
         }

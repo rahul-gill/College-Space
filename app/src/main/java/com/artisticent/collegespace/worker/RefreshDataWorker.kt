@@ -3,7 +3,7 @@ package com.artisticent.collegespace.worker
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.artisticent.collegespace.domain.Repository
+import com.artisticent.collegespace.domain.EventRepository
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -11,7 +11,7 @@ import javax.inject.Inject
 class RefreshDataWorker @Inject constructor(
     appContext: Context,
     params: WorkerParameters,
-    val repository: Repository
+    private val eventRepository: EventRepository
     ) : CoroutineWorker(appContext, params){
 
     companion object{
@@ -19,7 +19,7 @@ class RefreshDataWorker @Inject constructor(
     }
     override suspend fun doWork(): Result{
         return try{
-            repository.loadContestDataFromNetwork()
+            eventRepository.loadContestDataFromNetwork()
             Result.success()
         }catch (e: HttpException){
             Result.failure()

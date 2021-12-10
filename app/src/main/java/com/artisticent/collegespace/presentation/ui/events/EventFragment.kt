@@ -42,11 +42,10 @@ class EventFragment @Inject constructor(): Fragment(){
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_event, container, false)
 
         //things for WeekView
-        val mMonthChangeListener = MonthChangeListener{ _, newMonth ->
-            val events =  viewModel.eventList.value?.filter {
+        val mMonthChangeListener = MonthChangeListener { _, newMonth ->
+            return@MonthChangeListener viewModel.eventList.value?.filter {
                 it.startTime.get(Calendar.MONTH) == newMonth
             }
-            return@MonthChangeListener events
         }
 
         val mEventClickListener = WeekView.EventClickListener { event, _ ->

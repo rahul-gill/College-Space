@@ -3,7 +3,7 @@ package com.artisticent.collegespace.presentation.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.artisticent.collegespace.domain.Repository
+import com.artisticent.collegespace.domain.EventRepository
 import com.artisticent.collegespace.domain.models.EventModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -12,7 +12,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class EventViewModel @Inject constructor(var repository: Repository) : ViewModel() {
+class EventViewModel @Inject constructor(private var eventRepository: EventRepository) : ViewModel() {
     private val _eventList = MutableLiveData<MutableList<EventModel>>(mutableListOf())
     val eventList
         get() = _eventList
@@ -26,10 +26,10 @@ class EventViewModel @Inject constructor(var repository: Repository) : ViewModel
         loadEvents()
     }
 
-    fun loadEvents(){
+    private fun loadEvents(){
         var ret: MutableLiveData<List<EventModel>>
         viewModelScope.launch(Dispatchers.IO) {
-            ret = MutableLiveData(repository.loadAllEvents())
+            ret = MutableLiveData(eventRepository.loadAllEvents())
             this@EventViewModel._eventList.value!!.addAll(ret.value!!)
         }
 
@@ -37,12 +37,12 @@ class EventViewModel @Inject constructor(var repository: Repository) : ViewModel
     fun insertEvent(event : EventModel){
         this@EventViewModel._eventList.value?.add(event)
         viewModelScope.launch(Dispatchers.IO) {
-            repository.insertEvent(event)
+            eventRepository.insertEvent(event)
         }
     }
     fun deleteEvent(event: EventModel){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteEvent(event)
+            eventRepository.deleteEvent(event)
             withContext(Dispatchers.Main){
                 _eventList.value?.remove(event)
                 _eventListUpdate.value = true

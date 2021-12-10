@@ -1,6 +1,8 @@
 package com.artisticent.collegespace.data.room
 
 import androidx.room.*
+import com.artisticent.collegespace.data.room.entities.ContestEntity
+import com.artisticent.collegespace.data.room.entities.EventEntity
 
 @Dao
 interface EventDatabaseDao {

@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PostsViewModel  @Inject constructor(val repository: FirebaseRepository) : ViewModel(){
+class PostsViewModel  @Inject constructor(private val repository: FirebaseRepository) : ViewModel(){
 
     suspend fun createPost(postText: String, postImage: Bitmap?, userGroup: String) = repository.createPost(
         postText,

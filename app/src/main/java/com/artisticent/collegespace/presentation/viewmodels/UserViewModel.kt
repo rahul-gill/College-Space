@@ -13,7 +13,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class UserViewModel @Inject constructor(val repository: FirebaseRepository): ViewModel() {
+class UserViewModel @Inject constructor(private val repository: FirebaseRepository): ViewModel() {
     val userLoggedIn: Boolean
         get() = repository.userLoggedIn()
 

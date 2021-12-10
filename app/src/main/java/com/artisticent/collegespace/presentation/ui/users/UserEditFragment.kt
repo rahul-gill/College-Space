@@ -28,7 +28,7 @@ class UserEditFragment : Fragment() {
     lateinit var binding: FragmentUserEditBinding
     val viewModel : UserViewModel by viewModels()
     private var imageUri: Uri? = null
-    var userImageChanged = false
+    private var userImageChanged = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

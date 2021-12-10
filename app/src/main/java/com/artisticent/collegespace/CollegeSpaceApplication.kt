@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit
 
 
 @HiltAndroidApp
-class ThisApplication : Application(){
+class CollegeSpaceApplication : Application(){
     private val applicationScope = CoroutineScope(Dispatchers.IO)
 
     private fun delayedInit() {
