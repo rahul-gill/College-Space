@@ -1,6 +1,8 @@
 package com.artisticent.collegespace.presentation.viewmodels
 
 import android.graphics.Bitmap
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.artisticent.collegespace.domain.FirebaseRepository
@@ -20,9 +22,20 @@ class UserViewModel @Inject constructor(private val repository: FirebaseReposito
     suspend fun getCurrentUser(): UserModel {
         return repository.getLoggedInUser()
     }
+    private val _currentUserData = MutableLiveData<UserModel>(null)
+    val currentUserData: LiveData<UserModel>
+        get() = _currentUserData
+
+    init{
+        viewModelScope.launch {
+            _currentUserData.value = getCurrentUser()!!
+        }
+    }
+
     private fun setCurrentUser(value: UserModel){
         viewModelScope.launch {
             repository.updateUser(value)
+            _currentUserData.value = value
         }
     }
 
@@ -44,15 +57,14 @@ class UserViewModel @Inject constructor(private val repository: FirebaseReposito
         }
     }
 
-    suspend fun updateUserDetails(name: String, username: String, about: String, imageBitmap: Bitmap? = null){
+    suspend fun updateUserDetails(name: String? = null, username: String? = null, about: String? = null, imageBitmap: Bitmap? = null){
         withContext(viewModelScope.coroutineContext) {
             val currentUser = getCurrentUser()
             currentUser.apply {
-                this.name = name
-                this.username = username
-                this.about = about
-                imageBitmap?.let { this.userImg = repository.uploadUserImage(it).toString() }
-                Timber.i("debug: uploaded image url = $userImg")
+                if(name != null) this.name = name
+                if(username != null)this.username = username
+                if(about != null) this.about = about
+                if(imageBitmap != null) this.userImg = repository.uploadUserImage(imageBitmap).toString()
             }
             setCurrentUser(currentUser)
         }
