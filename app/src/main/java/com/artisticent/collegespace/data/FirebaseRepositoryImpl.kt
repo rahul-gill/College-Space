@@ -80,6 +80,7 @@ class FirebaseRepositoryImpl @Inject constructor(): FirebaseRepository{
     }
 
     override suspend fun getJoinedUserGroups(groupNames: List<String>): List<UserGroupModel>{
+        if(groupNames.isEmpty()) return listOf()
         val groupsReference = fireStoreDb.collection("user_group").whereIn("user_group_id", groupNames)
         return groupsReference.get().await().toObjects(UserGroupModel::class.java)
     }
