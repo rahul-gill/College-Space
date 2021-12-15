@@ -1,14 +1,15 @@
 package com.artisticent.collegespace.domain.models
 
+import com.squareup.moshi.JsonClass
 import java.text.SimpleDateFormat
 import java.util.*
 
-
+@JsonClass(generateAdapter = true)
 data class ContestModel(
     var id: Int,
     var name: String,
     var platform: Platform,
-    var start_time: Calendar,
+    var start_time: Date,
     val status : Status,
 ){
     enum class Platform{

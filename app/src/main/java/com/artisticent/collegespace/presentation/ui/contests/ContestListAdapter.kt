@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.artisticent.collegespace.R
 import com.artisticent.collegespace.databinding.ContestItemBinding
 import com.artisticent.collegespace.domain.models.ContestModel
 
@@ -25,7 +26,25 @@ class ContestListAdapter :
 
     class ViewHolder(private var binding: ContestItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item: ContestModel) {
-            binding.contest = item
+            item.let{
+                binding.imageView.setImageResource(
+                    when(it.platform){
+                        ContestModel.Platform.CODECHEF -> R.drawable.ic_codechef
+                        ContestModel.Platform.LEETCODE -> R.drawable.ic_leetcode
+                        ContestModel.Platform.CODEFORCES_GYM -> R.drawable.ic_codeforces
+                        ContestModel.Platform.CODEFORCES -> R.drawable.ic_codeforces
+                        ContestModel.Platform.TOPCODER -> R.drawable.ic_topcoder
+                        ContestModel.Platform.KICKSTART -> R.drawable.ic_google
+                        ContestModel.Platform.HACKERRANK -> R.drawable.ic_hackerrank
+                        ContestModel.Platform.HACKEREARTH -> R.drawable.ic_hackerearth
+                        ContestModel.Platform.CSACADEMY -> R.drawable.ic_csacademy
+                        ContestModel.Platform.ATCODER -> R.drawable.ic_atcoder
+                        ContestModel.Platform.TOPH -> R.drawable.ic_toph
+                    }
+                )
+                binding.contestName.text = it.name
+                binding.contestTime.text = it.timeString()
+            }
             binding.executePendingBindings()
         }
 

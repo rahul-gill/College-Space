@@ -8,10 +8,12 @@ import com.artisticent.collegespace.data.contestsApi.ContestApi
 import com.artisticent.collegespace.data.contestsApi.NetworkInterceptor
 import com.artisticent.collegespace.data.room.AppDatabase
 import com.artisticent.collegespace.data.room.EventDatabaseDao
+import com.artisticent.collegespace.data.room.entities.ModelJsonConverter
 import com.artisticent.collegespace.domain.EventRepository
 import com.artisticent.collegespace.domain.FirebaseRepository
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,6 +22,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.*
 import javax.inject.Singleton
 
 @Module
@@ -29,6 +32,7 @@ object AppModule{
     @Singleton
     @Provides
     fun getMoshiInstance(): Moshi = Moshi.Builder()
+        .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
         .build()
 
     @Singleton
@@ -50,15 +54,17 @@ object AppModule{
 
     @Singleton
     @Provides
-    fun getEventDatabaseInstance(@ApplicationContext context: Context): AppDatabase{
+    fun getEventDatabaseInstance(@ApplicationContext context: Context, moshi: Moshi): AppDatabase{
         return Room.databaseBuilder(
             context,
             AppDatabase::class.java,
             "Event Database"
         )
+            .addTypeConverter(ModelJsonConverter(moshi))
             .build()
     }
 
+    @Singleton
     @Provides
     fun getEventDatabaseDao(database: AppDatabase) : EventDatabaseDao{
         return database.eventDatabaseDao
@@ -73,7 +79,10 @@ object AppModule{
 
     @Singleton
     @Provides
-    fun getEventRepository(): EventRepository{
-        return EventRepositoryImpl()
+    fun getEventRepository(
+        databaseDao: EventDatabaseDao,
+        contestApi: ContestApi
+    ): EventRepository{
+        return EventRepositoryImpl(databaseDao, contestApi)
     }
 }

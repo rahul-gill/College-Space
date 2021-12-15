@@ -6,12 +6,15 @@ import androidx.core.view.forEach
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.artisticent.collegespace.R
 import com.artisticent.collegespace.databinding.FragmentContestsBinding
 import com.artisticent.collegespace.domain.models.ContestModel
 import com.artisticent.collegespace.presentation.viewmodels.ContestViewModel
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ContestsFragment : Fragment() {
@@ -24,27 +27,27 @@ class ContestsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_contests,container,false)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         binding.contestList.adapter = adapter
+        binding.contestList.itemAnimator = null
+        binding.contestRefreshLayout.setSize(0)
 
         val contestFilter = binding.contestPlatformFilter
         contestFilter.forEach { child ->
             (child as Chip).setOnCheckedChangeListener{ _, _ ->
-                registerFilterChange()
+                onFilterOrDataChange()
             }
         }
 
         binding.contestRefreshLayout.setOnRefreshListener {
             viewModel.loadContestDataNew()
-            contestFilter.clearCheck()
+
         }
 
         viewModel.contestList.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-
+            onFilterOrDataChange(newData = it)
         }
         viewModel.isLoadingEvents.observe(viewLifecycleOwner){
             binding.contestRefreshLayout.isRefreshing = it
@@ -55,17 +58,26 @@ class ContestsFragment : Fragment() {
         return binding.root
     }
 
-    private fun registerFilterChange() {
+    private fun onFilterOrDataChange(newData: List<ContestModel>? = null) {
+        binding.progressCircular.visibility = View.VISIBLE
+        binding.contestList.visibility = View.GONE
+        val data = newData ?: viewModel.contestList.value
         val checkedItemIds = binding.contestPlatformFilter.checkedChipIds
         if(checkedItemIds.size == 0){
-            adapter.submitList(viewModel.contestList.value)
+            adapter.submitList(data)
         }else{
-            adapter.submitList(viewModel.contestList.value?.filter {
+            adapter.submitList(data?.filter {
                 for(i in checkedItemIds){
                     if(platformComparator(it.platform,i)) return@filter true
                 }
                 return@filter false
             })
+        }
+        lifecycleScope.launch {
+            delay(200)
+            binding.contestList.layoutManager?.scrollToPosition(0)
+            binding.progressCircular.visibility = View.GONE
+            binding.contestList.visibility = View.VISIBLE
         }
     }
 

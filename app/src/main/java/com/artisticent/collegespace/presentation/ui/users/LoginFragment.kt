@@ -16,7 +16,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.artisticent.collegespace.presentation.LoadingScreen
 import com.artisticent.collegespace.presentation.ui.MainActivity
-import com.artisticent.collegespace.presentation.ui.utils.toast
 import com.artisticent.collegespace.presentation.viewmodels.UserViewModel
 import com.artisticent.collegespace.util.Util
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,7 +63,7 @@ class LoginFragment : Fragment() {
                                     navigateMainActivity()
                                 } catch (e: Exception) {
                                     withContext(Dispatchers.Main) {
-                                        toast(requireContext(), e.message)
+                                        Util.toast(requireContext(), e.message)
                                         isLoading = false
                                     }
                                 }
@@ -82,8 +81,8 @@ class LoginFragment : Fragment() {
 
     private fun sendPasswordResetLink(resetEmail: String) = lifecycleScope.launch {
         val wasSuccessful = viewModel.sendPasswordResetToEmail(resetEmail)
-        if(wasSuccessful) toast(requireContext(), "The reset link was sent successfully.")
-        else toast(requireContext(), "Some error occurred.")
+        if(wasSuccessful) Util.toast(requireContext(), "The reset link was sent successfully.")
+        else Util.toast(requireContext(), "Some error occurred.")
     }
 
 

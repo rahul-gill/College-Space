@@ -6,20 +6,28 @@ import com.artisticent.collegespace.domain.models.ContestModel
 import com.artisticent.collegespace.domain.models.EventModel
 import com.squareup.moshi.Moshi
 import javax.inject.Inject
+import com.squareup.moshi.FromJson
+
+import com.squareup.moshi.ToJson
+import java.text.DateFormat
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 @ProvidedTypeConverter
 class ModelJsonConverter @Inject constructor(moshi: Moshi) {
-    private val moshiEventModelAdapter = moshi.adapter(EventModel::class.java)
+    //private val moshiEventModelAdapter = moshi.adapter(EventModel::class.java)
     private val moshiContestModelAdapter = moshi.adapter(ContestModel::class.java)
 
-    @TypeConverter
-    fun fromEventModelToJson(value : EventModel): String {
-        return moshiEventModelAdapter.toJson(value)
-    }
-    @TypeConverter
-    fun fromJsonToEventModel(value: String): EventModel {
-        return moshiEventModelAdapter.fromJson(value)!!
-    }
+//    @TypeConverter
+//    fun fromEventModelToJson(value : EventModel): String {
+//        return moshiEventModelAdapter.toJson(value)
+//    }
+//    @TypeConverter
+//    fun fromJsonToEventModel(value: String): EventModel {
+//        return moshiEventModelAdapter.fromJson(value)!!
+//    }
 
     @TypeConverter
     fun fromContestModelToJson(value : ContestModel): String {

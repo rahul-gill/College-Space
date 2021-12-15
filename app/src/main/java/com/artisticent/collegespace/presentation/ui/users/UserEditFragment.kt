@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.artisticent.collegespace.presentation.LoadingScreen
-import com.artisticent.collegespace.presentation.ui.utils.toast
 import com.artisticent.collegespace.presentation.viewmodels.UserViewModel
 import com.artisticent.collegespace.util.Util
 import dagger.hilt.android.AndroidEntryPoint
@@ -74,7 +73,7 @@ class UserEditFragment : Fragment() {
                             try{
                                 getImageContent.launch("image/*")
                             }catch (e: Exception){
-                                toast(requireContext(), e.message)
+                                Util.toast(requireContext(), e.message)
                             }
                         },
                         userImageUrl = currentUserData?.userImg,

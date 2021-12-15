@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.artisticent.collegespace.domain.models.EventModel
 
-@Entity
+//@Entity
 data class EventEntity(
     @PrimaryKey(autoGenerate = true)
     val eventId: Int = 0,

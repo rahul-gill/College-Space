@@ -8,7 +8,7 @@ import com.artisticent.collegespace.data.room.entities.ContestEntity
 import com.artisticent.collegespace.data.room.entities.ModelJsonConverter
 
 @Database(
-    entities = [EventEntity::class, ContestEntity::class],
+    entities = [ContestEntity::class], //EventEntity::class
     version = 1,
     exportSchema = false
 )

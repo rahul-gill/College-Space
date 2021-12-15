@@ -19,11 +19,14 @@ data class ContestItem(
 ){
     fun toContestModel() : ContestModel{
         val startTimeModified = start_time
-        startTimeModified.removeRange(start_time.length -8 , start_time.length)
-
         val startTime = Calendar.getInstance()
-        val sdf = SimpleDateFormat("yyyy-MM-dd'T'kk:mm:ss", Locale.getDefault())
-        startTime.time = sdf.parse(startTimeModified)!!
+        val sdf = SimpleDateFormat("yyyy-MM-dd'T'kk:mm:ss.000'Z'", Locale.getDefault())
+        val sdf2 = SimpleDateFormat("yyyy-MM-dd kk:mm:ss z", Locale.getDefault())
+        try{
+            startTime.time = sdf.parse(startTimeModified)!!
+        }catch (e: Exception){
+            startTime.time = sdf2.parse(startTimeModified)!!
+        }
         return ContestModel(
             name.hashCode(),
             name,
@@ -40,7 +43,7 @@ data class ContestItem(
                 "LeetCode"        -> ContestModel.Platform.LEETCODE
                 else              -> ContestModel.Platform.TOPH
                       },
-            startTime,
+            startTime.time,
             when(status){
                 "CODING" -> ContestModel.Status.RUNNING
                 else     -> ContestModel.Status.BEFORE

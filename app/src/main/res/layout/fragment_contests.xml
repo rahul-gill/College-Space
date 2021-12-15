@@ -14,6 +14,8 @@
         android:layout_height="match_parent"
         tools:context=".presentation.ui.contests.ContestsFragment">
 
+
+
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,7 +29,7 @@
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/contest_platform_filter"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:singleLine="true"
                 app:singleSelection="false">
@@ -104,6 +106,16 @@
             </com.google.android.material.chip.ChipGroup>
 
         </HorizontalScrollView>
+        <ProgressBar
+            android:id="@+id/progress_circular"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal_scroll_view_filters"/>
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/contest_refresh_layout"
             android:layout_width="match_parent"
@@ -112,11 +124,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/horizontal_scroll_view_filters" >
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/contest_list"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/contest_list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -16,8 +16,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.artisticent.collegespace.R
 import com.artisticent.collegespace.databinding.FragmentNewPostBinding
-import com.artisticent.collegespace.presentation.ui.utils.toast
 import com.artisticent.collegespace.presentation.viewmodels.PostsViewModel
+import com.artisticent.collegespace.util.Util
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -59,7 +59,7 @@ class NewPostFragment : Fragment() {
                 }
             }catch (e: Exception){
                 setupVisibility(posting = false)
-                toast(requireContext(), e.message)
+                Util.toast(requireContext(), e.message)
             }
         }
         return binding.root

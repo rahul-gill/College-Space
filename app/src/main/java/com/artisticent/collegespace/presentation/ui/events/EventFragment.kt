@@ -17,8 +17,8 @@ import com.alamkanak.weekview.WeekView
 import com.artisticent.collegespace.R
 import com.artisticent.collegespace.databinding.FragmentEventBinding
 import com.artisticent.collegespace.domain.models.EventModel
-import com.artisticent.collegespace.presentation.ui.utils.toast
 import com.artisticent.collegespace.presentation.viewmodels.EventViewModel
+import com.artisticent.collegespace.util.Util
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -54,7 +54,7 @@ class EventFragment @Inject constructor(): Fragment(){
                 var minutes = comp / 60000
                 val hours = minutes / 60
                 minutes %= 60
-                toast(requireContext(), "$hours:$minutes to go")
+                Util.toast(requireContext(), "$hours:$minutes to go")
             }
         }
 
@@ -66,7 +66,7 @@ class EventFragment @Inject constructor(): Fragment(){
                     .setPositiveButton("Yes") { _, _ ->
                         viewModel.deleteEvent(event as EventModel)
                     }.setNegativeButton("No") { _, _ ->
-                        toast(requireContext(), "Deletion cancelled")
+                        Util.toast(requireContext(), "Deletion cancelled")
                     }.create()
             }
             dialog!!.show()

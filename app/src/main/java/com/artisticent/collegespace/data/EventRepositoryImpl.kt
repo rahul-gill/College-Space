@@ -10,11 +10,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class EventRepositoryImpl @Inject constructor() : EventRepository{
-    @Inject
-    lateinit var databaseDao: EventDatabaseDao
-    @Inject
-    lateinit var contestApi: ContestApi
+class EventRepositoryImpl @Inject constructor(
+    val databaseDao: EventDatabaseDao,
+    val contestApi: ContestApi
+) : EventRepository{
 
     override suspend fun loadContestDataFromCache(): List<ContestModel> {
         return withContext(Dispatchers.IO) {
@@ -48,23 +47,24 @@ class EventRepositoryImpl @Inject constructor() : EventRepository{
     }
 
     override suspend fun insertEvent(event: EventModel) {
-        withContext(Dispatchers.IO){
-            databaseDao.insertEvent(event.eventModelToEventEntity())
-        }
+//        withContext(Dispatchers.IO){
+//            databaseDao.insertEvent(event.eventModelToEventEntity())
+//        }
     }
 
     override suspend fun deleteEvent(event : EventModel){
-        withContext(Dispatchers.IO) {
-            databaseDao.deleteEvent(event.eventModelToEventEntity())
-        }
+//        withContext(Dispatchers.IO) {
+//            databaseDao.deleteEvent(event.eventModelToEventEntity())
+//        }
     }
 
     override suspend fun loadAllEvents(): List<EventModel> {
-        return withContext(Dispatchers.IO) {
-            databaseDao.getAllEvents().map {
-                it.event.id = it.eventId
-                it.event
-            }
-        }
+        return listOf()
+//        withContext(Dispatchers.IO) {
+//            databaseDao.getAllEvents().map {
+//                it.event.id = it.eventId
+//                it.event
+//            }
+//        }
     }
 }
