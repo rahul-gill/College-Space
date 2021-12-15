@@ -20,7 +20,6 @@
             app:defaultNavHost="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:navGraph="@navigation/navigation_graph_login_signup"
-            tools:layout="@layout/fragment_login" />
+            app:navGraph="@navigation/navigation_graph_login_signup" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

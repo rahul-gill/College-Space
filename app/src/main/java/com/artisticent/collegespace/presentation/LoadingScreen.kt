@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun LoadingScreen(
     inProgress: Boolean = false,
-    message: String,
+    message: String = "",
     content: @Composable () -> Unit
 ) = AppTheme {
     if(inProgress){
@@ -22,11 +22,13 @@ fun LoadingScreen(
                 modifier = Modifier.align(Alignment.Center),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    text = message,
-                    fontSize = 20.sp,
-                    modifier = Modifier.padding(32.dp)
-                )
+                if(message != "") {
+                    Text(
+                        text = message,
+                        fontSize = 20.sp,
+                        modifier = Modifier.padding(32.dp)
+                    )
+                }
                 CircularProgressIndicator(
                     modifier = Modifier.height(64.dp).width(64.dp)
                 )

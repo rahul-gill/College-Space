@@ -34,8 +34,7 @@
     <fragment
         android:id="@+id/userEditFragment2"
         android:name="com.artisticent.collegespace.presentation.ui.users.UserEditFragment"
-        android:label="fragment_user_edit"
-        tools:layout="@layout/fragment_user_edit" >
+        android:label="fragment_user_edit">
         <argument
             android:name="username"
             app:argType="string"

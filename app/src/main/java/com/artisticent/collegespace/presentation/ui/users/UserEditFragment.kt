@@ -14,7 +14,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.artisticent.collegespace.databinding.FragmentUserEditBinding
 import com.artisticent.collegespace.presentation.LoadingScreen
 import com.artisticent.collegespace.presentation.ui.utils.toast
 import com.artisticent.collegespace.presentation.viewmodels.UserViewModel
@@ -25,7 +24,6 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class UserEditFragment : Fragment() {
-    lateinit var binding: FragmentUserEditBinding
     val viewModel : UserViewModel by viewModels()
     private var imageUri = mutableStateOf<Uri?>(null)
     private var userImageChanged = false

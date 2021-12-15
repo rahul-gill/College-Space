@@ -55,8 +55,7 @@
     <fragment
         android:id="@+id/userEditFragment"
         android:name="com.artisticent.collegespace.presentation.ui.users.UserEditFragment"
-        android:label="fragment_user_edit"
-        tools:layout="@layout/fragment_user_edit" >
+        android:label="fragment_user_edit" >
         <action
             android:id="@+id/action_userEditFragment_to_userFragment"
             app:destination="@id/userFragment" />
