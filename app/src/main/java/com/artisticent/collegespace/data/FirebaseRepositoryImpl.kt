@@ -52,11 +52,11 @@ class FirebaseRepositoryImpl @Inject constructor(): FirebaseRepository{
 
 
     private var currentUser : UserModel? = null
-    override suspend fun getLoggedInUser(): UserModel {
+    override suspend fun getLoggedInUser(): UserModel? {
         Timber.i("debug: repo2 getLoggedInUser")
         return if(currentUser != null) currentUser!!
         else{
-            if(auth.uid == null) throw IllegalAccessException("No user logged in currently")
+            if(auth.uid == null) return null
             val res = fireStoreDb.collection("users").document(auth.uid!!).get().await()
             currentUser = res.toObject(UserModel::class.java)
             Timber.i("$currentUser")
@@ -114,7 +114,7 @@ class FirebaseRepositoryImpl @Inject constructor(): FirebaseRepository{
             }
         }
         val newPost = PostModel(
-            author = getLoggedInUser().username,
+            author = getLoggedInUser()!!.username,
             imageUrl = imageUri?.toString() ?: "",
             text = postText,
             user_group_id = userGroup

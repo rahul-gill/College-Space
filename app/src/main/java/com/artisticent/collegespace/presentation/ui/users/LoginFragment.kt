@@ -65,7 +65,7 @@ class LoginFragment : Fragment() {
                                 } catch (e: Exception) {
                                     withContext(Dispatchers.Main) {
                                         toast(requireContext(), e.message)
-                                        isLoading = true
+                                        isLoading = false
                                     }
                                 }
                             }

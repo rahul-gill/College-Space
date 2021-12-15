@@ -1,10 +1,8 @@
 package com.artisticent.collegespace.presentation.ui.users
 
-import android.database.Cursor
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -82,9 +80,7 @@ class UserEditFragment : Fragment() {
                             }
                         },
                         userImageUrl = currentUserData?.userImg,
-                        localImageUri =
-                            if(imageUri.value != null) getRealPathFromURI(imageUri.value!! )
-                            else null
+                        localImageUri = imageUri.value
                     )
                 }
             }
@@ -93,20 +89,6 @@ class UserEditFragment : Fragment() {
 
     private val getImageContent = registerForActivityResult(ActivityResultContracts.GetContent()) {
         imageUri.value = it
-        println(getRealPathFromURI(imageUri.value!!))
         userImageChanged = true
-    }
-    private fun getRealPathFromURI(contentURI: Uri): String? {
-        val result: String?
-        val cursor: Cursor? = requireActivity().contentResolver.query(contentURI, null, null, null, null)
-        if (cursor == null) {
-            result = contentURI.path
-        } else {
-            cursor.moveToFirst()
-            val idx: Int = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
-            result = cursor.getString(idx)
-            cursor.close()
-        }
-        return result
     }
 }

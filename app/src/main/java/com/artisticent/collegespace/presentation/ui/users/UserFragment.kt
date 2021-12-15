@@ -44,7 +44,7 @@ class UserFragment : Fragment() {
         binding.groupRecyclerView.adapter = adapter
 
         lifecycleScope.launch {
-            val user = viewModel.getCurrentUser()
+            val user = viewModel.getCurrentUser()!!
             binding.userName.text = user.name
             binding.about.text = user.about
             if(user.userImg.isNotBlank())

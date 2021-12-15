@@ -2,6 +2,7 @@ package com.artisticent.collegespace.presentation.ui.users
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -26,14 +27,13 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import coil.compose.rememberImagePainter
 import com.artisticent.collegespace.presentation.AppTheme
-import java.io.File
 
 @Composable
 fun UserEditScreen(
     onUpdateDetails: (name: String, description: String) -> Unit,
     onImageClick: () -> Unit,
     userImageUrl: String?,
-    localImageUri: String? = null
+    localImageUri: Uri? = null
 ) = AppTheme{
     var name by rememberSaveable { mutableStateOf("") }
     var description by rememberSaveable { mutableStateOf("") }
@@ -47,6 +47,18 @@ fun UserEditScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ){
+        val painter = rememberImagePainter(
+            data = when {
+                localImageUri != null -> localImageUri
+                userImageUrl.isNullOrBlank() -> ""
+                else -> userImageUrl
+            },
+            builder ={
+                placeholder(drawableResId = com.artisticent.collegespace.R.drawable.ic_user)
+                error(drawableResId = com.artisticent.collegespace.R.drawable.ic_user)
+                crossfade(true)
+            },
+        )
         Image(
             contentDescription = "",
             modifier = Modifier
@@ -67,17 +79,7 @@ fun UserEditScreen(
                         }
                     }
                 },
-            painter = rememberImagePainter(
-                data = when {
-                    localImageUri != null -> File(localImageUri)
-                    userImageUrl.isNullOrBlank() -> ""
-                    else -> userImageUrl
-                }.also{ println("wow $it") },
-                builder ={
-                    placeholder(drawableResId = com.artisticent.collegespace.R.drawable.ic_user)
-                    error(drawableResId = com.artisticent.collegespace.R.drawable.ic_user)
-                }
-            )
+            painter = painter
         )
 
 

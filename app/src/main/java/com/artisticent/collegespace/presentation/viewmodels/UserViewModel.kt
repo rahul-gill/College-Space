@@ -11,7 +11,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,7 +18,7 @@ class UserViewModel @Inject constructor(private val repository: FirebaseReposito
     val userLoggedIn: Boolean
         get() = repository.userLoggedIn()
 
-    suspend fun getCurrentUser(): UserModel {
+    suspend fun getCurrentUser(): UserModel? {
         return repository.getLoggedInUser()
     }
     private val _currentUserData = MutableLiveData<UserModel>(null)
@@ -28,7 +27,9 @@ class UserViewModel @Inject constructor(private val repository: FirebaseReposito
 
     init{
         viewModelScope.launch {
-            _currentUserData.value = getCurrentUser()!!
+            getCurrentUser()?.let {
+                _currentUserData.value = it
+            }
         }
     }
 
@@ -61,12 +62,12 @@ class UserViewModel @Inject constructor(private val repository: FirebaseReposito
         withContext(viewModelScope.coroutineContext) {
             val currentUser = getCurrentUser()
             currentUser.apply {
-                if(name != null) this.name = name
-                if(username != null)this.username = username
-                if(about != null) this.about = about
-                if(imageBitmap != null) this.userImg = repository.uploadUserImage(imageBitmap).toString()
+                if(name != null) this!!.name = name
+                if(username != null)this!!.username = username
+                if(about != null) this!!.about = about
+                if(imageBitmap != null) this!!.userImg = repository.uploadUserImage(imageBitmap).toString()
             }
-            setCurrentUser(currentUser)
+            setCurrentUser(currentUser!!)
         }
     }
 

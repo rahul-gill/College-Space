@@ -13,7 +13,7 @@ interface FirebaseRepository{
     suspend fun signup(username: String, email: String, password: String)
     suspend fun createUser(uid: String,username: String)
     suspend fun updateUser(modifiedUser: UserModel)
-    suspend fun getLoggedInUser(): UserModel
+    suspend fun getLoggedInUser(): UserModel?
     suspend fun getJoinedUserGroups(groupNames: List<String>): List<UserGroupModel>
     suspend fun uploadUserImage(bitmap: Bitmap): Uri?
 
