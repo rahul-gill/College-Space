@@ -3,16 +3,8 @@ package com.artisticent.collegespace.data.room.entities
 import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import com.artisticent.collegespace.domain.models.ContestModel
-import com.artisticent.collegespace.domain.models.EventModel
 import com.squareup.moshi.Moshi
 import javax.inject.Inject
-import com.squareup.moshi.FromJson
-
-import com.squareup.moshi.ToJson
-import java.text.DateFormat
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 @ProvidedTypeConverter

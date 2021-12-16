@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.platform.ComposeView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,7 +17,8 @@ import com.alamkanak.weekview.MonthLoader.MonthChangeListener
 import com.alamkanak.weekview.WeekView
 import com.artisticent.collegespace.R
 import com.artisticent.collegespace.databinding.FragmentEventBinding
-import com.artisticent.collegespace.domain.models.EventModel
+import com.artisticent.collegespace.domain.models.EventModelOld
+import com.artisticent.collegespace.presentation.ui.events.schedule.SchedulePreview
 import com.artisticent.collegespace.presentation.viewmodels.EventViewModel
 import com.artisticent.collegespace.util.Util
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,6 +41,10 @@ class EventFragment @Inject constructor(): Fragment(){
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        return ComposeView(requireContext()).apply {
+            setContent { SchedulePreview() }
+        }
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_event, container, false)
 
         //things for WeekView
@@ -64,7 +70,7 @@ class EventFragment @Inject constructor(): Fragment(){
                     .setTitle("Delete this event?")
                     .setMessage("Do you want to delete the event ${event.name}")
                     .setPositiveButton("Yes") { _, _ ->
-                        viewModel.deleteEvent(event as EventModel)
+                        viewModel.deleteEvent(event as EventModelOld)
                     }.setNegativeButton("No") { _, _ ->
                         Util.toast(requireContext(), "Deletion cancelled")
                     }.create()
@@ -116,7 +122,7 @@ class EventFragment @Inject constructor(): Fragment(){
             navigate(EventFragmentDirections.actionEventFragmentToNewEventFragment())
         }
         //get args from New Event Fragment
-        val event = EventModel()
+        val event = EventModelOld()
         val bundle = args.argBundle
         if(bundle != null) {
             event.id = bundle.hashCode()

@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "com.artisticent.collegespace"
-        minSdk 24
+        minSdk 26
         targetSdk 30
         versionCode 1
         versionName "1.0"
@@ -136,7 +136,7 @@ dependencies {
     implementation "androidx.compose.ui:ui-tooling:$compose_version"
     implementation "com.google.android.material:compose-theme-adapter:$compose_version"
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
-    implementation 'androidx.activity:activity-compose:1.4.0'
+    implementation "androidx.activity:activity-compose:$compose_version"
 
 
 }

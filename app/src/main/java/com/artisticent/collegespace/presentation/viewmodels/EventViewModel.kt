@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.artisticent.collegespace.domain.EventRepository
-import com.artisticent.collegespace.domain.models.EventModel
+import com.artisticent.collegespace.domain.models.EventModelOld
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EventViewModel @Inject constructor(private var eventRepository: EventRepository) : ViewModel() {
-    private val _eventList = MutableLiveData<MutableList<EventModel>>(mutableListOf())
+    private val _eventList = MutableLiveData<MutableList<EventModelOld>>(mutableListOf())
     val eventList
         get() = _eventList
     private val _eventListUpdate = MutableLiveData(true)
@@ -27,20 +27,20 @@ class EventViewModel @Inject constructor(private var eventRepository: EventRepos
     }
 
     private fun loadEvents(){
-        var ret: MutableLiveData<List<EventModel>>
+        var ret: MutableLiveData<List<EventModelOld>>
         viewModelScope.launch(Dispatchers.IO) {
             ret = MutableLiveData(eventRepository.loadAllEvents())
             this@EventViewModel._eventList.value!!.addAll(ret.value!!)
         }
 
     }
-    fun insertEvent(event : EventModel){
+    fun insertEvent(event : EventModelOld){
         this@EventViewModel._eventList.value?.add(event)
         viewModelScope.launch(Dispatchers.IO) {
             eventRepository.insertEvent(event)
         }
     }
-    fun deleteEvent(event: EventModel){
+    fun deleteEvent(event: EventModelOld){
         viewModelScope.launch(Dispatchers.IO) {
             eventRepository.deleteEvent(event)
             withContext(Dispatchers.Main){
