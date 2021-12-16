@@ -2,6 +2,10 @@ package com.artisticent.collegespace.util
 
 import android.content.Context
 import android.widget.Toast
+import java.time.Duration
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.util.*
 
 object Util{
     fun verifyLoginSignupCredentials(
@@ -24,5 +28,32 @@ object Util{
     }
     fun toast(context: Context, message: String?) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+    fun toLocalDateTime(date: Date): LocalDateTime? {
+        return date.toInstant()
+            .atZone(ZoneId.systemDefault())
+            .toLocalDateTime()
+    }
+
+    fun toDate(localDateTime: LocalDateTime): Date {
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault())
+                .toInstant());
+    }
+
+    fun latestLocalDateTime(date: LocalDateTime, repeatPeriod: Duration): LocalDateTime {
+        val current = LocalDateTime.now()
+        while (current.isAfter(date)){
+            date.plus(repeatPeriod)
+        }
+        return date
+    }
+    fun latestLocalDateTime(date: Date, repeatPeriod: Duration? = null): LocalDateTime {
+        if(repeatPeriod == null) return toLocalDateTime(date)!!
+        val localDateTime = toLocalDateTime(date)
+        val current = LocalDateTime.now()
+        while (current.isAfter(localDateTime)){
+            localDateTime!!.plus(repeatPeriod)
+        }
+        return localDateTime!!
     }
 }

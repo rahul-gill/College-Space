@@ -12,7 +12,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,17 +25,19 @@ import java.time.temporal.ChronoUnit
 
 @Composable
 fun Schedule(
-    events: List<Event>,
+    events: List<UiEvent>,
     modifier: Modifier = Modifier,
-    eventContent: @Composable (positionedEvent: PositionedEvent) -> Unit = { BasicEvent(positionedEvent = it) },
+    eventContent: @Composable (positionedEvent: PositionedEvent) -> Unit = { BasicEvent(positionedEvent = it, showTimeOfEvents = showTimeOfEvents) },
     dayHeader: @Composable (day: LocalDate) -> Unit = { BasicDayHeader(day = it) },
     timeLabel: @Composable (time: LocalTime) -> Unit = { BasicSidebarLabel(time = it) },
-    minDate: LocalDate = events.minByOrNull(Event::start)?.start?.toLocalDate() ?: LocalDate.now(),
-    maxDate: LocalDate = events.maxByOrNull(Event::end)?.end?.toLocalDate() ?: LocalDate.now(),
+    minDate: LocalDate = LocalDate.now(),
+    maxDate: LocalDate = events.maxByOrNull(UiEvent::end)?.end?.toLocalDate() ?: LocalDate.now(),
     minTime: LocalTime = LocalTime.MIN,
     maxTime: LocalTime = LocalTime.MAX,
     daySize: ScheduleSize = ScheduleSize.FixedSize(256.dp),
     hourSize: ScheduleSize = ScheduleSize.FixedSize(64.dp),
+    oneLineHeader: Boolean = true,
+    showTimeOfEvents: Boolean = true
 ) {
     val numDays = ChronoUnit.DAYS.between(minDate, maxDate).toInt() + 1
     val numMinutes = ChronoUnit.MINUTES.between(minTime, maxTime).toInt() + 1
@@ -48,7 +49,6 @@ fun Schedule(
     var scale by remember { mutableStateOf(1f) }
     val transformableState = rememberTransformableState { zoomChange, _ , _ -> scale *= zoomChange }
 
-    var boxSize = 0
     BoxWithConstraints(modifier = modifier
         .transformable(transformableState)
     ) {
@@ -71,7 +71,8 @@ fun Schedule(
                 modifier = Modifier
                     .padding(start = with(LocalDensity.current) { sidebarWidth.toDp() })
                     .horizontalScroll(horizontalScrollState)
-                    .onGloballyPositioned { headerHeight = it.size.height }
+                    .onGloballyPositioned { headerHeight = it.size.height },
+                oneLine = oneLineHeader
             )
             Row(modifier = Modifier
                 .weight(1f)
@@ -97,7 +98,8 @@ fun Schedule(
                     modifier = Modifier
                         .weight(1f)
                         .verticalScroll(verticalScrollState)
-                        .horizontalScroll(horizontalScrollState)
+                        .horizontalScroll(horizontalScrollState),
+                    showTimeOfEvents = showTimeOfEvents
                 )
             }
         }
@@ -108,6 +110,9 @@ fun Schedule(
 @Composable
 fun SchedulePreview() {
     AppTheme {
-        Schedule(sampleEvents)
+        Schedule(sampleEvents,
+            minDate = sampleEvents.minByOrNull(UiEvent::start)?.end?.toLocalDate() ?: LocalDate.now(),
+            showTimeOfEvents = false
+        )
     }
 }

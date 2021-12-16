@@ -2,21 +2,21 @@ package com.artisticent.collegespace.data.room
 
 import androidx.room.*
 import com.artisticent.collegespace.data.room.entities.ContestEntity
-import com.artisticent.collegespace.data.room.entities.EventEntity
+import com.artisticent.collegespace.data.room.entities.PersonalEventEntity
 
 @Dao
 interface EventDatabaseDao {
-//    @Insert
-//    fun insertEvent(event : EventEntity)
-//
-//    @Update
-//    fun updateEvent(event: EventEntity)
-//
-//    @Delete
-//    fun deleteEvent(event: EventEntity)
-//
-//    @Query("SELECT * FROM EventEntity")
-//    fun getAllEvents() : List<EventEntity>
+    @Insert
+    fun insertEvent(vararg event : PersonalEventEntity)
+
+    @Update
+    fun updateEvent(event: PersonalEventEntity)
+
+    @Delete
+    fun deleteEvent(event: PersonalEventEntity)
+
+    @Query("SELECT * FROM PersonalEventEntity")
+    fun getAllEvents() : List<PersonalEventEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertContest(contest: ContestEntity)

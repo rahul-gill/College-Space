@@ -1,9 +1,13 @@
 package com.artisticent.collegespace.presentation.ui.events.schedule
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -16,13 +20,15 @@ import java.time.temporal.ChronoUnit
 fun BasicDayHeader(
     day: LocalDate,
     modifier: Modifier = Modifier,
+    oneLine: Boolean = true
 ) {
     Text(
-        text = day.format(DayFormatter),
+        text = day.format(if(oneLine) SingleLineDayFormatter else  DayFormatter),
         textAlign = TextAlign.Center,
         modifier = modifier
             .fillMaxWidth()
-            .padding(4.dp)
+            .padding(4.dp),
+        fontWeight = FontWeight.Bold
     )
 }
 
@@ -32,7 +38,8 @@ fun ScheduleHeader(
     maxDate: LocalDate,
     dayWidth: Dp,
     modifier: Modifier = Modifier,
-    dayHeader: @Composable (day: LocalDate) -> Unit = { BasicDayHeader(day = it) },
+    oneLine: Boolean = true,
+    dayHeader: @Composable (day: LocalDate) -> Unit = { BasicDayHeader(day = it, oneLine = oneLine) },
 ) {
     Row(modifier = modifier) {
         val numDays = ChronoUnit.DAYS.between(minDate, maxDate).toInt() + 1

@@ -3,12 +3,11 @@ package com.artisticent.collegespace.data.room
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.artisticent.collegespace.data.room.entities.EventEntity
-import com.artisticent.collegespace.data.room.entities.ContestEntity
-import com.artisticent.collegespace.data.room.entities.ModelJsonConverter
+import com.artisticent.collegespace.data.room.entities.*
+import com.artisticent.collegespace.domain.models.Event
 
 @Database(
-    entities = [ContestEntity::class], //EventEntity::class
+    entities = [ContestEntity::class, PersonalEventEntity::class], //EventEntity::class
     version = 1,
     exportSchema = false
 )

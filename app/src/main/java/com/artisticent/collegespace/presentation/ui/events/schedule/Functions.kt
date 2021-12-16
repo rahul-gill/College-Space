@@ -4,7 +4,7 @@ import java.time.LocalTime
 import java.time.temporal.ChronoUnit
 
 
-internal fun splitEvents(events: List<Event>): List<PositionedEvent> {
+internal fun splitEvents(events: List<UiEvent>): List<PositionedEvent> {
     return events
         .map { event ->
             val startDate = event.start.toLocalDate()

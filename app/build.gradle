@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "com.artisticent.collegespace"
-        minSdk 26
+        minSdk 24
         targetSdk 30
         versionCode 1
         versionName "1.0"
@@ -27,6 +27,7 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -70,8 +71,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
 
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1-native-mt'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
 
     // Coroutine Lifecycle Scopes
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
@@ -139,4 +140,5 @@ dependencies {
     implementation "androidx.activity:activity-compose:$compose_version"
 
 
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 }

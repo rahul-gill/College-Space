@@ -19,21 +19,22 @@ import kotlin.math.roundToInt
 
 @Composable
 fun BasicSchedule(
-    events: List<Event>,
+    events: List<UiEvent>,
     modifier: Modifier = Modifier,
-    eventContent: @Composable (positionedEvent: PositionedEvent) -> Unit = { BasicEvent(positionedEvent = it) },
-    minDate: LocalDate = events.minByOrNull(Event::start)?.start?.toLocalDate() ?: LocalDate.now(),
-    maxDate: LocalDate = events.maxByOrNull(Event::end)?.end?.toLocalDate() ?: LocalDate.now(),
+    eventContent: @Composable (positionedEvent: PositionedEvent) -> Unit = { BasicEvent(positionedEvent = it, showTimeOfEvents = showTimeOfEvents) },
+    minDate: LocalDate = events.minByOrNull(UiEvent::start)?.start?.toLocalDate() ?: LocalDate.now(),
+    maxDate: LocalDate = events.maxByOrNull(UiEvent::end)?.end?.toLocalDate() ?: LocalDate.now(),
     minTime: LocalTime = LocalTime.MIN,
     maxTime: LocalTime = LocalTime.MAX,
     dayWidth: Dp,
     hourHeight: Dp,
+    showTimeOfEvents: Boolean = true
 ) {
     val numDays = ChronoUnit.DAYS.between(minDate, maxDate).toInt() + 1
     val numMinutes = ChronoUnit.MINUTES.between(minTime, maxTime).toInt() + 1
     val numHours = numMinutes / 60
     val dividerColor = if (MaterialTheme.colors.isLight) Color.LightGray else Color.DarkGray
-    val positionedEvents = remember(events) { arrangeEvents(splitEvents(events.sortedBy(Event::start))).filter { it.end > minTime && it.start < maxTime } }
+    val positionedEvents = remember(events) { arrangeEvents(splitEvents(events.sortedBy(UiEvent::start))).filter { it.end > minTime && it.start < maxTime } }
     Layout(
         content = {
             positionedEvents.forEach { positionedEvent ->

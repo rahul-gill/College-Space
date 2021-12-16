@@ -3,9 +3,9 @@ package com.artisticent.collegespace.data
 import com.artisticent.collegespace.data.contestsApi.ContestApi
 import com.artisticent.collegespace.data.room.EventDatabaseDao
 import com.artisticent.collegespace.data.room.entities.ContestEntity
+import com.artisticent.collegespace.data.room.entities.PersonalEventEntity
 import com.artisticent.collegespace.domain.EventRepository
 import com.artisticent.collegespace.domain.models.ContestModel
-import com.artisticent.collegespace.domain.models.EventModelOld
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -46,25 +46,21 @@ class EventRepositoryImpl @Inject constructor(
         return contestList!!
     }
 
-    override suspend fun insertEvent(event: EventModelOld) {
-//        withContext(Dispatchers.IO){
-//            databaseDao.insertEvent(event.eventModelToEventEntity())
-//        }
+    override suspend fun insertEvent(event: PersonalEventEntity) {
+        withContext(Dispatchers.IO){
+            databaseDao.insertEvent(event)
+        }
     }
 
-    override suspend fun deleteEvent(event : EventModelOld){
-//        withContext(Dispatchers.IO) {
-//            databaseDao.deleteEvent(event.eventModelToEventEntity())
-//        }
+    override suspend fun deleteEvent(event : PersonalEventEntity){
+        withContext(Dispatchers.IO) {
+            databaseDao.deleteEvent(event)
+        }
     }
 
-    override suspend fun loadAllEvents(): List<EventModelOld> {
-        return listOf()
-//        withContext(Dispatchers.IO) {
-//            databaseDao.getAllEvents().map {
-//                it.event.id = it.eventId
-//                it.event
-//            }
-//        }
+    override suspend fun loadAllEvents(): List<PersonalEventEntity> {
+        return withContext(Dispatchers.IO) {
+            return@withContext databaseDao.getAllEvents()
+        }
     }
 }
