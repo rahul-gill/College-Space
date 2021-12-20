@@ -139,11 +139,6 @@ fun NewEventScreen(onDone: (String,LocalDateTime,LocalDateTime,String) -> Unit) 
                 value = eventDescription,
                 label = { Text("Event Description") },
                 onValueChange = { eventDescription = it },
-                textStyle = TextStyle(fontSize = 40.sp),
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                keyboardActions = KeyboardActions(
-                    onDone = { keyboardController?.hide() }
-                ),
                 modifier = Modifier
                     .fillMaxWidth()
                     .defaultMinSize(minHeight = 150.dp)

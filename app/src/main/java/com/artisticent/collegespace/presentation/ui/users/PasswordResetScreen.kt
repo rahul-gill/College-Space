@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
@@ -14,9 +16,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import com.artisticent.collegespace.presentation.AppTheme
 import com.artisticent.collegespace.util.Util
 
+@ExperimentalComposeUiApi
 @Composable
 @Preview
 fun PasswordResetScreen(
@@ -38,7 +45,7 @@ fun PasswordResetScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-
+        val keyboardController = LocalSoftwareKeyboardController.current
         Text(
             text = "Password Reset",
             modifier = Modifier.padding(8.dp),
@@ -53,7 +60,12 @@ fun PasswordResetScreen(
             value = email,
             label = { Text(text = "email") },
             onValueChange = { email = it },
-            modifier = Modifier.padding(start = 8.dp, end = 8.dp)
+            modifier = Modifier.padding(start = 8.dp, end = 8.dp),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Done),
+            keyboardActions = KeyboardActions(
+                onDone = { keyboardController?.hide() }
+            ),
+            singleLine = true
         )
         Button(
             onClick = {

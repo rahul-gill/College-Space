@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -26,6 +27,7 @@ class UserEditFragment : Fragment() {
     val viewModel : UserViewModel by viewModels()
     private var imageUri = mutableStateOf<Uri?>(null)
     private var userImageChanged = false
+    @ExperimentalComposeUiApi
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,7 +79,9 @@ class UserEditFragment : Fragment() {
                             }
                         },
                         userImageUrl = currentUserData?.userImg,
-                        localImageUri = imageUri.value
+                        localImageUri = imageUri.value,
+                        currentName = currentUserData?.name ?: "",
+                        currentDescription = currentUserData?.about ?: ""
                     )
                 }
             }

@@ -10,6 +10,8 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
@@ -19,24 +21,31 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import coil.compose.rememberImagePainter
 import com.artisticent.collegespace.presentation.AppTheme
 
+@ExperimentalComposeUiApi
 @Composable
 fun UserEditScreen(
     onUpdateDetails: (name: String, description: String) -> Unit,
     onImageClick: () -> Unit,
     userImageUrl: String?,
-    localImageUri: Uri? = null
+    localImageUri: Uri? = null,
+    currentName: String,
+    currentDescription: String
 ) = AppTheme{
-    var name by rememberSaveable { mutableStateOf("") }
-    var description by rememberSaveable { mutableStateOf("") }
+    var name by rememberSaveable { mutableStateOf(currentName) }
+    var description by rememberSaveable { mutableStateOf(currentDescription) }
     val context = LocalContext.current
     val launcher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -59,6 +68,8 @@ fun UserEditScreen(
                 crossfade(true)
             },
         )
+        val (focusRequester) =  FocusRequester.createRefs()
+
         Image(
             contentDescription = "",
             modifier = Modifier
@@ -87,14 +98,18 @@ fun UserEditScreen(
             value = name,
             label = { Text(text = "your name") },
             onValueChange = { name = it },
-            maxLines = 1,
-            modifier = Modifier.padding(start = 8.dp, end = 8.dp)
+            singleLine = true,
+            modifier = Modifier.padding(start = 8.dp, end = 8.dp),
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+            keyboardActions = KeyboardActions(
+                onNext = { focusRequester.requestFocus() }
+            )
         )
         OutlinedTextField(
             value = description,
             label = { Text(text = "about you") },
             onValueChange = { description = it },
-            modifier = Modifier.padding(start = 8.dp, end = 8.dp)
+            modifier = Modifier.padding(start = 8.dp, end = 8.dp).focusRequester(focusRequester)
         )
         Button(
             modifier = Modifier.padding(16.dp),
