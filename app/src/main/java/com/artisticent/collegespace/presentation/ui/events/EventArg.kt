@@ -7,14 +7,14 @@ import java.util.*
 
 data class EventArg(
     var name: String,
-    var startDate: Calendar = Calendar.getInstance(),
-    var endDate: Calendar = Calendar.getInstance(),
-    var type: String = "Personal Event"
+    var startDate: Long,
+    var endDate: Long,
+    var description: String = ""
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
-        parcel.readSerializable() as Calendar,
-        parcel.readSerializable() as Calendar,
+        parcel.readLong(),
+        parcel.readLong(),
         parcel.readString()!!
     )
 
@@ -22,7 +22,7 @@ data class EventArg(
         parcel.writeString(name)
         parcel.writeSerializable(startDate)
         parcel.writeSerializable(endDate)
-        parcel.writeSerializable(type)
+        parcel.writeSerializable(description)
     }
 
     override fun describeContents(): Int {
