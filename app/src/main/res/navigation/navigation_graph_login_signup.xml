@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment2"
-        android:name="com.artisticent.collegespace.presentation.ui.users.LoginFragment"
+        android:name="com.github.rahul_gill.collegespace.presentation.ui.users.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment2_to_signupFragment2"
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/signupFragment2"
-        android:name="com.artisticent.collegespace.presentation.ui.users.SignupFragment"
+        android:name="com.github.rahul_gill.collegespace.presentation.ui.users.SignupFragment"
         android:label="SignupFragment" >
         <action
             android:id="@+id/action_signupFragment2_to_loginFragment2"
@@ -29,11 +29,11 @@
     </fragment>
     <fragment
         android:id="@+id/userFragment2"
-        android:name="com.artisticent.collegespace.presentation.ui.users.UserFragment"
+        android:name="com.github.rahul_gill.collegespace.presentation.ui.users.UserFragment"
         android:label="UserFragment" />
     <fragment
         android:id="@+id/userEditFragment2"
-        android:name="com.artisticent.collegespace.presentation.ui.users.UserEditFragment"
+        android:name="com.github.rahul_gill.collegespace.presentation.ui.users.UserEditFragment"
         android:label="fragment_user_edit">
         <argument
             android:name="username"

@@ -19,3 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-keep class * extends androidx.fragment.app.Fragment{}
+-keep class com.github.rahul_gill.collegespace.presentation.ui.events.EventArg
+-keepnames class * extends android.os.Parcelable
+-keepnames class * extends java.io.Serializable

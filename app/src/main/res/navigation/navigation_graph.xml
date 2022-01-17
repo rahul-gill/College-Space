@@ -6,24 +6,24 @@
 
     <fragment
         android:id="@+id/contestsFragment"
-        android:name="com.artisticent.collegespace.presentation.ui.contests.ContestsFragment"
+        android:name="com.github.rahul_gill.collegespace.presentation.ui.contests.ContestsFragment"
         android:label="ContestsFragment" />
     <fragment
         android:id="@+id/eventFragment"
-        android:name="com.artisticent.collegespace.presentation.ui.events.EventFragment"
+        android:name="com.github.rahul_gill.collegespace.presentation.ui.events.EventFragment"
         android:label="EventFragment" >
         <action
             android:id="@+id/action_eventFragment_to_newEventFragment"
             app:destination="@id/newEventFragment" />
         <argument
             android:name="arg_bundle"
-            app:argType="com.artisticent.collegespace.presentation.ui.events.EventArg"
+            app:argType="com.github.rahul_gill.collegespace.presentation.ui.events.EventArg"
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/newEventFragment"
-        android:name="com.artisticent.collegespace.presentation.ui.events.NewEventFragment"
+        android:name="com.github.rahul_gill.collegespace.presentation.ui.events.NewEventFragment"
         android:label="NewEventFragment" >
         <action
             android:id="@+id/action_newEventFragment_to_eventFragment"
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/userFragment"
-        android:name="com.artisticent.collegespace.presentation.ui.users.UserFragment"
+        android:name="com.github.rahul_gill.collegespace.presentation.ui.users.UserFragment"
         android:label="UserFragment" >
         <action
             android:id="@+id/action_userFragment_to_feedFragment"
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/feedFragment"
-        android:name="com.artisticent.collegespace.presentation.ui.user_groups.FeedFragment"
+        android:name="com.github.rahul_gill.collegespace.presentation.ui.user_groups.UserGroupFragment"
         android:label="FeedFragment" >
         <argument
             android:name="user_group"
@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/userEditFragment"
-        android:name="com.artisticent.collegespace.presentation.ui.users.UserEditFragment"
+        android:name="com.github.rahul_gill.collegespace.presentation.ui.users.UserEditFragment"
         android:label="fragment_user_edit" >
         <action
             android:id="@+id/action_userEditFragment_to_userFragment"
@@ -62,7 +62,7 @@
     </fragment>
     <fragment
         android:id="@+id/newPostFragment"
-        android:name="com.artisticent.collegespace.presentation.ui.user_groups.NewPostFragment"
+        android:name="com.github.rahul_gill.collegespace.presentation.ui.user_groups.NewPostFragment"
         android:label="NewPostFragment" >
         <action
             android:id="@+id/action_newPostFragment_to_feedFragment"

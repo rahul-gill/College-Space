@@ -77,12 +77,37 @@
         <entry key="../../../layout/compose-model-1639987981742.xml" value="0.30996621621621623" />
         <entry key="../../../layout/compose-model-1639998247851.xml" value="0.30996621621621623" />
         <entry key="../../../layout/compose-model-1639998431359.xml" value="0.31049069373942473" />
+        <entry key="../../../layout/compose-model-1639999789825.xml" value="0.42773892773892774" />
+        <entry key="../../../layout/compose-model-1639999824729.xml" value="0.30996621621621623" />
+        <entry key="../../../layout/compose-model-1640000023361.xml" value="0.31049069373942473" />
+        <entry key="../../../layout/compose-model-1641041581485.xml" value="0.42773892773892774" />
+        <entry key="../../../layout/compose-model-1641041616869.xml" value="0.31049069373942473" />
+        <entry key="../../../layout/compose-model-1641041623376.xml" value="0.36574074074074076" />
+        <entry key="../../../layout/compose-model-1641045122365.xml" value="0.13682432432432431" />
+        <entry key="../../../layout/compose-model-1641216838467.xml" value="0.31049069373942473" />
+        <entry key="../../../layout/compose-model-1641216908592.xml" value="0.31049069373942473" />
+        <entry key="../../../layout/compose-model-1641216982106.xml" value="0.30996621621621623" />
+        <entry key="../../../layout/compose-model-1641217188426.xml" value="0.30996621621621623" />
+        <entry key="../../../layout/compose-model-1641217264698.xml" value="0.33" />
+        <entry key="../../../layout/compose-model-1641217704883.xml" value="0.31049069373942473" />
+        <entry key="../../../layout/compose-model-1641217718970.xml" value="0.31049069373942473" />
+        <entry key="../../../layout/compose-model-1641217765834.xml" value="0.33" />
+        <entry key="../../../layout/compose-model-1641217939250.xml" value="0.33" />
+        <entry key="../../../layout/compose-model-1641218024949.xml" value="0.33" />
+        <entry key="../../../layout/compose-model-1641218087938.xml" value="0.5" />
+        <entry key="../../../layout/compose-model-1641976691862.xml" value="0.1362098138747885" />
+        <entry key="../../../layout/compose-model-1642342000128.xml" value="0.67" />
+        <entry key="../../../layout/compose-model-1642345554116.xml" value="0.75" />
+        <entry key="../../../layout/compose-model-1642348992012.xml" value="0.5" />
+        <entry key="../../../layout/compose-model-1642418132433.xml" value="0.5074074074074074" />
+        <entry key="../../../layout/compose-model-1642422163188.xml" value="0.5074074074074074" />
         <entry key="../../../layout/custom_preview.xml" value="0.3692708333333333" />
         <entry key="app/src/main/res/drawable-anydpi/ic_link.xml" value="0.20572916666666666" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.20572916666666666" />
         <entry key="app/src/main/res/drawable/basic_round_background.xml" value="0.221875" />
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.20572916666666666" />
         <entry key="app/src/main/res/drawable/ic_calendar.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/drawable/ic_codechef.xml" value="0.3703125" />
         <entry key="app/src/main/res/drawable/ic_codeforces.xml" value="0.20572916666666666" />
         <entry key="app/src/main/res/drawable/ic_contest.xml" value="0.20572916666666666" />
         <entry key="app/src/main/res/drawable/ic_contest_black.xml" value="0.20572916666666666" />

@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="viewmodel"
-            type="com.artisticent.collegespace.presentation.viewmodels.ContestViewModel" />
+            name="viewModel"
+            type="com.github.rahul_gill.collegespace.presentation.viewmodels.ContestViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
