@@ -44,7 +44,6 @@ fun EventInfoDialog(
                 )
                 Button(
                     onClick = {
-                        onEventEdit(uiEvent)
                         onDismiss()
                         onEventDelete(uiEvent)
                     },

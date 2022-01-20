@@ -32,6 +32,7 @@ import com.github.rahul_gill.collegespace.presentation.ui.events.schedule.UiEven
 import com.github.rahul_gill.collegespace.presentation.ui.events.schedule.WeekSchedule
 import com.github.rahul_gill.collegespace.presentation.viewmodels.EventViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -47,6 +48,8 @@ class EventFragment @Inject constructor(): Fragment(){
     ): View {
         setupNotificationChannels(requireContext())
         args.argBundle?.let {
+            Timber.d("In=> $it")
+            Timber.d("Out=> ${PersonalEventEntity.from(it)}")
             viewModel.insertEvent(PersonalEventEntity.from(it))
             setupEventNotification(requireContext(),it, timeBefore = 10 * 1000)
         }

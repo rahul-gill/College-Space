@@ -4,10 +4,16 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Shapes
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,11 +50,13 @@ fun BasicEvent(
             )
             .padding(4.dp)
     ) {
-        if(showTimeOfEvents){
+        if (showTimeOfEvents) {
             Text(
-                text = "${event.start.format(EventTimeFormatter)} - ${event.end.format(
-                    EventTimeFormatter
-                )}",
+                text = "${event.start.format(EventTimeFormatter)} - ${
+                    event.end.format(
+                        EventTimeFormatter
+                    )
+                }",
                 style = MaterialTheme.typography.caption,
                 maxLines = 1,
                 overflow = TextOverflow.Clip,
@@ -56,7 +64,7 @@ fun BasicEvent(
         }
         Text(
             text = event.name,
-            style = MaterialTheme.typography.body1,
+            style = MaterialTheme.typography.caption.copy(Color.Black),
             fontWeight = FontWeight.Bold,
             overflow = TextOverflow.Ellipsis,
         )

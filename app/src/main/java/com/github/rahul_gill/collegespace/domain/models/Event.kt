@@ -4,6 +4,7 @@ import android.os.Parcelable
 import androidx.annotation.Keep
 import com.github.rahul_gill.collegespace.util.Util
 import kotlinx.parcelize.Parcelize
+import timber.log.Timber
 import java.time.Duration
 import java.util.*
 
@@ -25,7 +26,7 @@ data class Event(
             eventName = contestModel.name,
             start = contestModel.start_time,
             duration = DurationWrapper.from(Duration.between(Util.latestLocalDateTime(contestModel.start_time), Util.latestLocalDateTime(contestModel.end_time)))
-        )
+        ).also { Timber.d("before: $contestModel\n after: $it") }
     }
 }
 
@@ -37,6 +38,7 @@ data class DurationWrapper(
 ) : Parcelable {
     companion object{
         fun from(duration: Duration): DurationWrapper {
+            duration.toString()
             return DurationWrapper(
                 duration.nano,
                 duration.isNegative,
@@ -45,6 +47,6 @@ data class DurationWrapper(
         }
     }
     fun toDuration(): Duration{
-        return Duration.ofNanos( if(negative) -1L else 1L * seconds*1000_1000_1000 + nano)
+        return Duration.ZERO.withNanos(nano).withSeconds(seconds).apply { if(negative) negated()  }
     }
 }

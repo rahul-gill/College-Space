@@ -22,10 +22,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
@@ -40,6 +38,7 @@ import com.github.rahul_gill.collegespace.domain.models.imageId
 import com.github.rahul_gill.collegespace.presentation.theme.AppTheme
 import com.github.rahul_gill.collegespace.presentation.theme.LocalExtendedColors
 import com.github.rahul_gill.collegespace.presentation.viewmodels.ContestViewModel
+import com.github.rahul_gill.collegespace.util.Util
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import dagger.hilt.android.AndroidEntryPoint
@@ -141,17 +140,17 @@ fun ContestItem(
                 modifier = Modifier.padding(8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-//            val image = Util.loadLocalPicture(imageRes = contestModel.platform.imageId)
-//            image?.let {
+            val image = Util.loadLocalPicture(imageRes = contestModel.platform.imageId)
+            image?.let {
                 Image(
-//                    bitmap = it,
+                    bitmap = it,
 //                        FOR PREVIEW
-                    painter = painterResource(id = contestModel.platform.imageId),
+//                    painter = painterResource(id = contestModel.platform.imageId),
                     contentDescription = "",
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
                     colorFilter = ColorFilter.tint(MaterialTheme.colors.onSurface)
                 )
-//            }
+            }
 
                 Column(
                     verticalArrangement = Arrangement.SpaceBetween,

@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter
 
 data class UiEvent(
     var name: String = "",
-    var color: Color = Color.Cyan,
+    var color: Color = Color.Yellow,
     var start: LocalDateTime = LocalDateTime.now(),
     var end: LocalDateTime = LocalDateTime.now(),
     var description: String? = null,
