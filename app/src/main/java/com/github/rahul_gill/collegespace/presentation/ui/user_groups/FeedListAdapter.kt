@@ -60,8 +60,8 @@ class FeedListAdapter(private val onClickForHeader: (TextView) -> Unit) :
     class ViewHolder(private var binding: PostItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: PostModel?) {
             binding.userGroupName.text = item?.user_group_id
-            if(item?.text != ""){
-                binding.postText.text = item?.text
+            if(item?.title != ""){
+                binding.postText.text = item?.title
                 Linkify.addLinks(binding.postText,Linkify.ALL)
             }else{
                 binding.postText.visibility = View.GONE

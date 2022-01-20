@@ -19,14 +19,19 @@ data class ContestItem(
     val url: String
 ){
     fun toContestModel() : ContestModel{
-        val startTimeModified = start_time
         val startTime = Calendar.getInstance()
+        val endTime = Calendar.getInstance()
         val sdf = SimpleDateFormat("yyyy-MM-dd'T'kk:mm:ss.000'Z'", Locale.getDefault())
         val sdf2 = SimpleDateFormat("yyyy-MM-dd kk:mm:ss z", Locale.getDefault())
         try{
-            startTime.time = sdf.parse(startTimeModified)!!
+            startTime.time = sdf.parse(start_time)!!
         }catch (e: Exception){
-            startTime.time = sdf2.parse(startTimeModified)!!
+            startTime.time = sdf2.parse(start_time)!!
+        }
+        try{
+            endTime.time = sdf.parse(end_time)!!
+        }catch (e: Exception){
+            startTime.time = sdf2.parse(end_time)!!
         }
         return ContestModel(
             name.hashCode(),
@@ -45,6 +50,7 @@ data class ContestItem(
                 else              -> ContestPlatform.TOPH
                       },
             startTime.time,
+            endTime.time,
             when(status){
                 "CODING" -> ContestModel.Status.RUNNING
                 else     -> ContestModel.Status.BEFORE

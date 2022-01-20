@@ -14,6 +14,7 @@ data class ContestModel(
     var name: String,
     var platform: ContestPlatform,
     var start_time: Date,
+    var end_time: Date,
     val status : Status,
 ){
 

@@ -9,7 +9,8 @@ data class PostModel(
     val author: String = "",
     val createdAt: Timestamp = Timestamp.now(),
     val imageUrl: String = "",
-    val text: String = "",
+    val title: String = "",
+    val description: String = "",
     val upVotes: Int = 0,
     val user_group_id: String = ""
 )

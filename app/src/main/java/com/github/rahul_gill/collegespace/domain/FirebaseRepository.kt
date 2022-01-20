@@ -2,6 +2,7 @@ package com.github.rahul_gill.collegespace.domain
 
 import android.graphics.Bitmap
 import android.net.Uri
+import com.github.rahul_gill.collegespace.domain.models.Event
 import com.github.rahul_gill.collegespace.domain.models.PostModel
 import com.github.rahul_gill.collegespace.domain.models.UserGroupModel
 import com.github.rahul_gill.collegespace.domain.models.UserModel
@@ -17,7 +18,7 @@ interface FirebaseRepository{
     suspend fun getJoinedUserGroups(groupNames: List<String>): List<UserGroupModel>
     suspend fun uploadUserImage(bitmap: Bitmap): Uri?
 
-    suspend fun createPost(postText: String, postImage: Bitmap?, userGroup: String)
-    suspend fun getPosts(userGroup: String = ""): List<PostModel>
+    suspend fun createPost(event: Event)
+    suspend fun getPosts(userGroup: String = ""): List<Event>
     suspend fun sendPasswordResetToEmail(email: String): Boolean
 }

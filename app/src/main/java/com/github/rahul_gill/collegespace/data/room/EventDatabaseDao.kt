@@ -1,12 +1,13 @@
 package com.github.rahul_gill.collegespace.data.room
 
 import androidx.room.*
+import androidx.room.OnConflictStrategy.REPLACE
 import com.github.rahul_gill.collegespace.data.room.entities.ContestEntity
 import com.github.rahul_gill.collegespace.data.room.entities.PersonalEventEntity
 
 @Dao
 interface EventDatabaseDao {
-    @Insert
+    @Insert(onConflict = REPLACE)
     fun insertEvent(vararg event : PersonalEventEntity)
 
     @Update
@@ -18,7 +19,7 @@ interface EventDatabaseDao {
     @Query("SELECT * FROM PersonalEventEntity")
     fun getAllEvents() : List<PersonalEventEntity>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = REPLACE)
     fun insertContest(contest: ContestEntity)
 
     @Query("SELECT * FROM ContestEntity")

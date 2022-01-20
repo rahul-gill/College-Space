@@ -22,25 +22,31 @@ private val transparentSurfaceDark  =  Color(0x442d2d3f)
 
 class AppColors(
     transparentSurface: Color,
+    grayText: Color,
     isLight: Boolean
 ) {
     var transparentSurface by mutableStateOf(transparentSurface)
+        private set
+    var grayText by mutableStateOf(grayText)
         private set
     var isLight by mutableStateOf(isLight)
         internal set
     fun copy(
         transparentSurface: Color = this.transparentSurface,
+        grayText: Color = this.grayText,
         isLight: Boolean = this.isLight
     ): AppColors = AppColors(
         transparentSurface,
+        grayText,
         isLight
     )
     fun updateColorsFrom(other: AppColors) {
         transparentSurface = other.transparentSurface
+        grayText = other.grayText
     }
 }
-fun lightExtendedColors() = AppColors(transparentSurfaceLight, true)
-fun darkExtendedColors() = AppColors(transparentSurfaceDark, false)
+fun lightExtendedColors() = AppColors(transparentSurfaceLight, Color.DarkGray, true)
+fun darkExtendedColors() = AppColors(transparentSurfaceDark, Color.LightGray,false)
 
 internal val LocalExtendedColors = staticCompositionLocalOf { lightExtendedColors() }
 

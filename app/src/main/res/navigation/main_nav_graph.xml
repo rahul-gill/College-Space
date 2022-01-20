@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    android:id="@+id/mainNavGraph"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/userFragment">
@@ -17,7 +19,7 @@
             app:destination="@id/newEventFragment" />
         <argument
             android:name="arg_bundle"
-            app:argType="com.github.rahul_gill.collegespace.presentation.ui.events.EventArg"
+            app:argType="com.github.rahul_gill.collegespace.domain.models.Event"
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
@@ -71,4 +73,8 @@
             android:name="userGroup"
             app:argType="string" />
     </fragment>
+    <action
+        android:id="@+id/toEventFragment"
+        app:destination="@id/eventFragment"
+        app:launchSingleTop="true"/>
 </navigation>

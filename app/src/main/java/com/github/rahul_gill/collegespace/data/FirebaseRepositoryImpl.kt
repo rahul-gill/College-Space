@@ -3,7 +3,7 @@ package com.github.rahul_gill.collegespace.data
 import android.graphics.Bitmap
 import android.net.Uri
 import com.github.rahul_gill.collegespace.domain.FirebaseRepository
-import com.github.rahul_gill.collegespace.domain.models.PostModel
+import com.github.rahul_gill.collegespace.domain.models.Event
 import com.github.rahul_gill.collegespace.domain.models.UserGroupModel
 import com.github.rahul_gill.collegespace.domain.models.UserModel
 import com.google.firebase.Timestamp
@@ -104,44 +104,33 @@ class FirebaseRepositoryImpl @Inject constructor(): FirebaseRepository{
         return uploadImage(bitmap, userImgRef)
     }
 
-    override suspend fun createPost(postText: String, postImage: Bitmap?, userGroup: String){
+    override suspend fun createPost(event: Event){
         Timber.i("debug: repo2 createPost")
-        var imageUri: Uri? = null
-        if(postImage != null) {
-            val postImgRef = storage.reference.child("images/${auth.uid}_post_${userGroup}.jpg")
-            withContext(Dispatchers.IO) {
-                imageUri = uploadImage(postImage, postImgRef)
-            }
-        }
-        val newPost = PostModel(
-            author = getLoggedInUser()!!.username,
-            imageUrl = imageUri?.toString() ?: "",
-            text = postText,
-            user_group_id = userGroup
-        )
         withContext(Dispatchers.IO) {
-            fireStoreDb.collection("posts").add(newPost).await()
+            fireStoreDb.collection("posts").add(event).await()
         }
     }
 
-    override suspend fun getPosts(userGroup: String): List<PostModel>{
+    override suspend fun getPosts(userGroup: String): List<Event>{
         Timber.i("debug: repo2 getPosts")
         return if(userGroup != ""){
-            val postsRef = fireStoreDb.collection("posts").whereEqualTo("user_group_id", userGroup).get().await()
-            postsRef.toObjects(PostModel::class.java)
+            val postsRef = fireStoreDb.collection("posts").whereEqualTo("userGroupName", userGroup).get().await()
+            postsRef.toObjects(Event::class.java)
         }else{
             //get posts from all joined user_groups
             val user = fireStoreDb.collection("users").document(auth.uid!!).get().await().toObject(
                 UserModel::class.java)
+            Timber.i("debug: repo2 getPosts $user")
             val userGroupList = user?.joinedUserGroups
             if(userGroupList.isNullOrEmpty()){
                 listOf()
             }
             else {
                 val postsRef =fireStoreDb.collection("posts").whereIn("user_group_id", userGroupList).get().await()
-                postsRef.toObjects(PostModel::class.java)
+                Timber.i("debug: repo2 getPosts $postsRef ")
+                postsRef.toObjects(Event::class.java)
             }
-        }
+        }.also { Timber.i("debug: repo2 getPosts $it ") }
     }
 
     override suspend fun sendPasswordResetToEmail(email: String): Boolean{

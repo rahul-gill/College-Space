@@ -23,6 +23,13 @@ data class UiEvent(
     var description: String? = null,
     var attendanceRecord: AttendanceRecord? = null
 ){
+    fun toPersonalEventEntity() = PersonalEventEntity(
+        eventName =  name,
+        start = Util.toDate(start),
+        end = Util.toDate(end),
+        description = description
+    )
+
     companion object{
         fun from(event: Event): UiEvent {
             return UiEvent(
@@ -37,7 +44,7 @@ data class UiEvent(
                     else -> Color.Cyan
                 },
                 start = Util.latestLocalDateTime(event.start),
-                end = Util.latestLocalDateTime(event.end),
+                end = event.duration?.let { Util.datePlusDuration(event.start,  it.toDuration()) } ?: LocalDateTime.now(),
                 description = event.description,
                 attendanceRecord = event.attendanceRecord
             )

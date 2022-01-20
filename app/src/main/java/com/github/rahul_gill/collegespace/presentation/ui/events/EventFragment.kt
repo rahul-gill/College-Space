@@ -31,10 +31,7 @@ import com.github.rahul_gill.collegespace.domain.models.Event
 import com.github.rahul_gill.collegespace.presentation.ui.events.schedule.UiEvent
 import com.github.rahul_gill.collegespace.presentation.ui.events.schedule.WeekSchedule
 import com.github.rahul_gill.collegespace.presentation.viewmodels.EventViewModel
-import com.github.rahul_gill.collegespace.util.Util
 import dagger.hilt.android.AndroidEntryPoint
-import java.time.LocalDateTime
-import java.time.ZoneOffset
 import javax.inject.Inject
 
 
@@ -50,12 +47,8 @@ class EventFragment @Inject constructor(): Fragment(){
     ): View {
         setupNotificationChannels(requireContext())
         args.argBundle?.let {
-            val event = PersonalEventEntity()
-            event.eventName = it.name
-            event.start = Util.toDate(LocalDateTime.ofEpochSecond(it.startDate, 0, ZoneOffset.UTC))
-            event.end = Util.toDate(LocalDateTime.ofEpochSecond(it.endDate, 0, ZoneOffset.UTC))
-            viewModel.insertEvent(event)
-            setupEventNotification(requireContext(), event.toEvent(), timeBefore = 10 * 1000)
+            viewModel.insertEvent(PersonalEventEntity.from(it))
+            setupEventNotification(requireContext(),it, timeBefore = 10 * 1000)
         }
 
         return ComposeView(requireContext()).apply {
@@ -84,6 +77,7 @@ class EventFragment @Inject constructor(): Fragment(){
                         EventInfoDialog(
                             uiEvent = eventInfoData,
                             onEventEdit = { goToNewEventScreen(eventInfoData) },
+                            onEventDelete = { viewModel.deleteEvent(eventInfoData.toPersonalEventEntity()) },
                             eventInfoDialogShowing,
                             onDismiss = { eventInfoDialogShowing = false }
                         )

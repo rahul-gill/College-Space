@@ -101,6 +101,18 @@
         <entry key="../../../layout/compose-model-1642348992012.xml" value="0.5" />
         <entry key="../../../layout/compose-model-1642418132433.xml" value="0.5074074074074074" />
         <entry key="../../../layout/compose-model-1642422163188.xml" value="0.5074074074074074" />
+        <entry key="../../../layout/compose-model-1642516131238.xml" value="0.5" />
+        <entry key="../../../layout/compose-model-1642517720209.xml" value="0.47942521227955587" />
+        <entry key="../../../layout/compose-model-1642518417009.xml" value="0.8939024390243903" />
+        <entry key="../../../layout/compose-model-1642520930182.xml" value="1.0" />
+        <entry key="../../../layout/compose-model-1642521141452.xml" value="0.5" />
+        <entry key="../../../layout/compose-model-1642522631435.xml" value="0.5" />
+        <entry key="../../../layout/compose-model-1642526421127.xml" value="0.31049069373942473" />
+        <entry key="../../../layout/compose-model-1642527687258.xml" value="0.33" />
+        <entry key="../../../layout/compose-model-1642528174264.xml" value="0.31049069373942473" />
+        <entry key="../../../layout/compose-model-1642651709324.xml" value="0.31049069373942473" />
+        <entry key="../../../layout/compose-model-1642652053169.xml" value="0.30996621621621623" />
+        <entry key="../../../layout/compose-model-1642652934176.xml" value="0.31049069373942473" />
         <entry key="../../../layout/custom_preview.xml" value="0.3692708333333333" />
         <entry key="app/src/main/res/drawable-anydpi/ic_link.xml" value="0.20572916666666666" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.20572916666666666" />
@@ -129,6 +141,7 @@
         <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.334375" />
         <entry key="app/src/main/res/layout/fragment_user_edit.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_user_group.xml" value="0.29981884057971014" />
         <entry key="app/src/main/res/layout/new_group_join.xml" value="0.17239583333333333" />
         <entry key="app/src/main/res/layout/post.xml" value="0.1" />
         <entry key="app/src/main/res/layout/post_item.xml" value="0.4648148148148148" />

@@ -2,7 +2,9 @@ package com.github.rahul_gill.collegespace.data.room.entities
 
 import androidx.room.Entity
 import androidx.room.Index
+import com.github.rahul_gill.collegespace.domain.models.DurationWrapper
 import com.github.rahul_gill.collegespace.domain.models.Event
+import com.github.rahul_gill.collegespace.util.Util
 import com.squareup.moshi.JsonClass
 import java.time.Duration
 import java.time.Instant
@@ -23,8 +25,18 @@ data class PersonalEventEntity(
     fun toEvent() = Event(
         eventName,
         start,
-        end,
-        repeatPeriod,
+        DurationWrapper.from(
+            Duration.between(Util.latestLocalDateTime(start) , Util.latestLocalDateTime(end))),
+        repeatPeriod?.let { DurationWrapper.from(repeatPeriod!!) } ,
         description
     )
+    companion object{
+        fun from(event: Event) = PersonalEventEntity(
+            eventName = event.eventName,
+            start = event.start,
+            end = event.duration?.let { Util.toDate(Util.toLocalDateTime(event.start)!!.plus(it.toDuration())) } ?: event.start,
+            description = event.description,
+            repeatPeriod = event.repeatPeriod?.toDuration()
+        )
+    }
 }

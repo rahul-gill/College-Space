@@ -68,6 +68,9 @@ object Util{
         }
         return localDateTime!!
     }
+    fun datePlusDuration(date: Date, duration: Duration): LocalDateTime{
+        return latestLocalDateTime(date).plus(duration)!!
+    }
 
     @Composable
     fun loadLocalPicture(
@@ -90,7 +93,7 @@ object Util{
     fun loadPicture(
         url: String,
         @DrawableRes defaultImage: Int = R.drawable.ic_codeforces
-    ): Bitmap? {
+    ): ImageBitmap? {
         var bitmapState by remember { mutableStateOf<Bitmap?>(null) }
         Glide.with(LocalContext.current)
             .asBitmap()
@@ -111,6 +114,6 @@ object Util{
                 }
                 override fun onLoadCleared(placeholder: Drawable?) {}
             })
-        return bitmapState
+        return bitmapState?.asImageBitmap()
     }
 }

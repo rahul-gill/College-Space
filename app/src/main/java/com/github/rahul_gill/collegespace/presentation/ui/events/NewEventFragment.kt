@@ -9,8 +9,11 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.github.rahul_gill.collegespace.domain.models.DurationWrapper
+import com.github.rahul_gill.collegespace.domain.models.Event
+import com.github.rahul_gill.collegespace.util.Util
+import java.time.Duration
 import java.time.LocalDateTime
-import java.time.ZoneOffset
 
 @ExperimentalComposeUiApi
 @ExperimentalMaterialApi
@@ -28,16 +31,14 @@ class NewEventFragment : Fragment() {
     }
 
     private val onDone = { name: String, start: LocalDateTime, end: LocalDateTime, description: String ->
-        val argsBundle = EventArg(
-            name = name,
-            startDate = start.toEpochSecond(ZoneOffset.UTC),
-            endDate = end.toEpochSecond(ZoneOffset.UTC),
+        val event = Event(
+            eventName = name,
+            start = Util.toDate(start),
+            duration = DurationWrapper.from(Duration.between(start, end)),
             description = description
         )
         findNavController().navigate(
-            NewEventFragmentDirections.actionNewEventFragmentToEventFragment(
-                argsBundle
-            )
+            NewEventFragmentDirections.actionNewEventFragmentToEventFragment(event)
         )
     }
 }
