@@ -1,0 +1,19 @@
+name: Manually triggered workflow
+on:
+  workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: permissions
+        run:  chmod +x ./gradlew
+      - name: Generate APK
+        run: ./gradlew assembleDebug
+      - name: Upload APK
+        uses: actions/upload-artifact@master
+        with:
+          name: app-debug.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
