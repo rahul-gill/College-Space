@@ -1,5 +1,5 @@
-In development
-Features will be
+~In development~ 
+Features I wanted to be these but couldn't do
 - apis for online contests notification
 - events menu for classes, club events, personal events 
 - there will be spaces for things like classes, clubs etc.
